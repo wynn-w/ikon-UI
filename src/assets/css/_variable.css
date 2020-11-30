@@ -1,0 +1,13 @@
+:root{
+    --button-height: 32px;
+    --font-size: 14px;
+    --button-color: #fff;
+    --button-bg: #409eff;
+    --button-bg-hover: #66b1ff;
+    --button-bg-active: #3a8ee6;
+    --border-radius: .4rem;
+    --border-color: #409eff;
+    --border-color-hover: #66b1ff;
+    --border-color-active: #3e8ee6;
+
+}
