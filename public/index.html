@@ -1,13 +1,14 @@
 <!--
  * @Author: wynn-w
  * @Date: 2020-11-30 18:09:28
- * @LastEditTime: 2020-11-30 23:13:57
+ * @LastEditTime: 2020-12-01 11:33:37
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \ikon-UI\public\index.html
 -->
 <!DOCTYPE html>
 <html lang="zh-hans">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,16 +16,14 @@
     <title>ikon-UI</title>
     <link rel="stylesheet" href="../src/assets/css/style.css">
 </head>
+
 <body>
-    <div id="app">
-        <j-button></j-button>
-    </div>
-    <script src="../node_modules/vue/dist/vue.min.js"></script>
-    <script src="../button.js"></script>
-    <script>
-        new Vue({
-            el: '#app'
-        })
-    </script>
+    <noscript>
+        <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
+            Please enable it to continue.</strong>
+    </noscript>
+    <div id="app"></div>
+    <script src="../src/main.js"></script>
 </body>
+
 </html>

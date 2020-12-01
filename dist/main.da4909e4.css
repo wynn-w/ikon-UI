@@ -1,0 +1,17 @@
+.j-button {
+  font-size: var(--font-size);
+  height: var(--button-height);
+  padding: 0 1rem;
+  border-radius: var(--border-radius);
+  border: 0.1rem solid var(--border-color);
+  background: var(--button-bg);
+  color: var(--button-color); }
+  .j-button:hover {
+    background: var(--button-bg-hover);
+    border: 0.1rem solid var(--border-color); }
+  .j-button:active {
+    background-color: var(--button-bg-active);
+    border: 0.1rem solid var(--border-color-active); }
+  .j-button:focus {
+    outline: none; }
+

@@ -4,7 +4,11 @@
   "description": "一个UI框架",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "parcel public/index.html",
+    "build": "parcel build main"
+  },
+  "alias": {
+    "vue": "./node_modules/vue/dist/vue.common.js"
   },
   "repository": {
     "type": "git",
@@ -21,6 +25,15 @@
   },
   "homepage": "https://github.com/wynn-w/ikon-UI#readme",
   "dependencies": {
-    "vue": "^2.6.11"
+    "components": "^0.1.0"
+  },
+  "devDependencies": {
+    "css-loader": "^5.0.1",
+    "node-sass": "^4.12.0",
+    "parcel-bundler": "^1.12.4",
+    "sass-loader": "^8.0.2",
+    "vue": "^2.6.12",
+    "vue-loader": "^15.9.5",
+    "vue-template-compiler": "^2.6.12"
   }
 }
