@@ -2,7 +2,7 @@
   "name": "ikon-ui",
   "version": "1.0.0",
   "description": "一个UI框架",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "start": "parcel public/index.html",
     "build": "parcel build main"
