@@ -3,11 +3,23 @@
     --font-size: 14px;
     --button-color: #fff;
     --button-bg: #409eff;
-    --button-bg-hover: #66b1ff;
-    --button-bg-active: #3a8ee6;
+    --button-bg-focus: #3a8ee6;
     --border-radius: .4rem;
     --border-color: #409eff;
-    --border-color-hover: #66b1ff;
-    --border-color-active: #3e8ee6;
+    --border-color-active: #3a8ee6;
 
 }
+/* // $color: (
+//   "primary": #409eff,
+//   "primary:hover":#66b1ff,
+//   "primary:click":#3a8ee6,
+//   "success": #67c23a,
+//   "info": #909399,
+//   "warning": #e6a23c,
+//   "danger": #f56c6c,
+//   "grey": #999,
+//   "dark-1": #343440,
+//   "dark": #222,
+//   "black": #000,
+//  "darkblue": #4b67af
+// ); */

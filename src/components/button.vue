@@ -37,14 +37,15 @@ export default {
   background: var(--button-bg);
   color: var(--button-color);
   &:hover {
-    background: var(--button-bg-hover);
-    border: 0.1rem solid var(--border-color);
+    opacity: .8;
   }
   &:active {
-    background-color: var(--button-bg-active);
+    opacity: 1 !important;
+    background: var(--border-color-active) !important;
     border: 0.1rem solid var(--border-color-active);
   }
   &:focus {
+    opacity: .8;
     outline: none;
   }
 }
