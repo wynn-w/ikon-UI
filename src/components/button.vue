@@ -1,19 +1,37 @@
 <template>
   <div>
-    <input type="button" value="设置" class="j-button" />
+    <button class="j-button f-box" >
+      <svg v-if="icon" class="icon" aria-hidden="true">
+        <use :xlink:href="`#i-${icon}`"></use>
+      </svg>
+      <slot></slot>
+    </button>
   </div>
 </template>
 
 <script>
 export default {
   name: "j-button",
+  props: ["icon","circle"],
   data() {
     return {};
   },
+  mounted(){
+    // console.log('circle: '+this.circle)
+  }
 };
 </script>
 
 <style lang="scss">
+.f-box{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.circle{
+  border-radius: 50%;
+}
 .j-button {
   font-size: var(--font-size);
   height: var(--button-height);
@@ -33,5 +51,9 @@ export default {
   &:focus {
     outline: none;
   }
+}
+.icon {
+  width: 1rem;
+  height: 1rem;
 }
 </style>
