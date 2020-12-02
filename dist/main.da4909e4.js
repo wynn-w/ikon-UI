@@ -12085,7 +12085,7 @@ if ("development" === 'production') {
 } else {
   module.exports = require('./vue.common.dev.js');
 }
-},{"./vue.common.dev.js":"../node_modules/vue/dist/vue.common.dev.js"}],"C:/Users/W_z/AppData/Roaming/npm-cache/_npx/6428/node_modules/parcel/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"./vue.common.dev.js":"../node_modules/vue/dist/vue.common.dev.js"}],"C:/Users/W_z/AppData/Roaming/npm-cache/_npx/5708/node_modules/parcel/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -12117,7 +12117,7 @@ function getBaseURL(url) {
 
 exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
-},{}],"C:/Users/W_z/AppData/Roaming/npm-cache/_npx/6428/node_modules/parcel/src/builtins/css-loader.js":[function(require,module,exports) {
+},{}],"C:/Users/W_z/AppData/Roaming/npm-cache/_npx/5708/node_modules/parcel/src/builtins/css-loader.js":[function(require,module,exports) {
 var bundle = require('./bundle-url');
 
 function updateLink(link) {
@@ -12152,7 +12152,7 @@ function reloadCSS() {
 }
 
 module.exports = reloadCSS;
-},{"./bundle-url":"C:/Users/W_z/AppData/Roaming/npm-cache/_npx/6428/node_modules/parcel/src/builtins/bundle-url.js"}],"../node_modules/vue-hot-reload-api/dist/index.js":[function(require,module,exports) {
+},{"./bundle-url":"C:/Users/W_z/AppData/Roaming/npm-cache/_npx/5708/node_modules/parcel/src/builtins/bundle-url.js"}],"../node_modules/vue-hot-reload-api/dist/index.js":[function(require,module,exports) {
 var Vue // late bind
 var version
 var map = Object.create(null)
@@ -12447,12 +12447,11 @@ exports.default = void 0;
 //
 var _default = {
   name: "j-button",
-  props: ["icon", "circle"],
+  props: ["icon"],
   data: function data() {
     return {};
   },
-  mounted: function mounted() {// console.log('circle: '+this.circle)
-  }
+  mounted: function mounted() {}
 };
 exports.default = _default;
         var $b2c1d1 = exports.default || module.exports;
@@ -12519,7 +12518,7 @@ render._withStripped = true
       
       }
     })();
-},{"_css_loader":"C:/Users/W_z/AppData/Roaming/npm-cache/_npx/6428/node_modules/parcel/src/builtins/css-loader.js","vue-hot-reload-api":"../node_modules/vue-hot-reload-api/dist/index.js","vue":"../node_modules/vue/dist/vue.common.js"}],"../src/App.vue":[function(require,module,exports) {
+},{"_css_loader":"C:/Users/W_z/AppData/Roaming/npm-cache/_npx/5708/node_modules/parcel/src/builtins/css-loader.js","vue-hot-reload-api":"../node_modules/vue-hot-reload-api/dist/index.js","vue":"../node_modules/vue/dist/vue.common.js"}],"../src/App.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -12644,7 +12643,7 @@ render._withStripped = true
       
       }
     })();
-},{"./components/button":"../src/components/button.vue","_css_loader":"C:/Users/W_z/AppData/Roaming/npm-cache/_npx/6428/node_modules/parcel/src/builtins/css-loader.js","vue-hot-reload-api":"../node_modules/vue-hot-reload-api/dist/index.js","vue":"../node_modules/vue/dist/vue.common.js"}],"../src/main.js":[function(require,module,exports) {
+},{"./components/button":"../src/components/button.vue","_css_loader":"C:/Users/W_z/AppData/Roaming/npm-cache/_npx/5708/node_modules/parcel/src/builtins/css-loader.js","vue-hot-reload-api":"../node_modules/vue-hot-reload-api/dist/index.js","vue":"../node_modules/vue/dist/vue.common.js"}],"../src/main.js":[function(require,module,exports) {
 "use strict";
 
 var _vue = _interopRequireDefault(require("vue"));
@@ -12658,7 +12657,7 @@ new _vue.default({
     return h(_App.default);
   }
 }).$mount('#app');
-},{"vue":"../node_modules/vue/dist/vue.common.js","./App.vue":"../src/App.vue"}],"C:/Users/W_z/AppData/Roaming/npm-cache/_npx/6428/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"vue":"../node_modules/vue/dist/vue.common.js","./App.vue":"../src/App.vue"}],"C:/Users/W_z/AppData/Roaming/npm-cache/_npx/5708/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -12686,7 +12685,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64658" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49723" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -12862,5 +12861,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["C:/Users/W_z/AppData/Roaming/npm-cache/_npx/6428/node_modules/parcel/src/builtins/hmr-runtime.js","../src/main.js"], null)
+},{}]},{},["C:/Users/W_z/AppData/Roaming/npm-cache/_npx/5708/node_modules/parcel/src/builtins/hmr-runtime.js","../src/main.js"], null)
 //# sourceMappingURL=/main.da4909e4.js.map

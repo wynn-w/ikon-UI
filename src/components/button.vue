@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button class="j-button f-box" >
+    <button class="j-button f-box">
       <svg v-if="icon" class="icon" aria-hidden="true">
         <use :xlink:href="`#i-${icon}`"></use>
       </svg>
@@ -12,13 +12,11 @@
 <script>
 export default {
   name: "j-button",
-  props: ["icon","circle"],
+  props: ["icon"],
   data() {
     return {};
   },
-  mounted(){
-    // console.log('circle: '+this.circle)
-  }
+  mounted(){}
 };
 </script>
 
@@ -29,9 +27,7 @@ export default {
   justify-content: center;
   align-items: center;
 }
-.circle{
-  border-radius: 50%;
-}
+
 .j-button {
   font-size: var(--font-size);
   height: var(--button-height);
