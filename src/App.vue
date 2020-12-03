@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-01 22:10:50
- * @LastEditTime: 2020-12-03 09:41:17
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-03 23:57:11
+ * @LastEditors: wynn-w
  * @Description: In User Settings Edit
  * @FilePath: \ikon-UI\src\App.vue
 -->
@@ -29,6 +29,20 @@
           <div class="btn-box_show-item">
             <j-button icon="setting" iconPosition="right">设置</j-button>
           </div>
+          <div class="btn-box_show-item">
+            <j-button :loading="true" iconPosition="left">设置</j-button>
+          </div>
+          <div class="btn-box_show-item">
+            <j-button :loading="true" iconPosition="right">设置</j-button>
+          </div>
+          <div class="btn-box_show-item">
+            <j-button
+              :loading="true"
+              iconPosition="right"
+              @show = "showdata"
+              >设置</j-button
+            >
+          </div>
         </div>
       </div>
     </div>
@@ -43,7 +57,14 @@ export default {
     "j-button": jButton,
   },
   data() {
-    return {};
+    return {
+      sum: 0,
+    };
+  },
+  methods: {
+    showdata(value){
+      console.log("showdata",value)
+    }
   },
 };
 </script>
@@ -61,10 +82,10 @@ export default {
   .btn-box_show {
     display: flex;
     flex-direction: row;
-    margin-top: .5em;
+    margin-top: 0.5em;
   }
 }
-.btn-box_show-item{
-  margin-right: .5em;
+.btn-box_show-item {
+  margin-right: 0.5em;
 }
 </style>

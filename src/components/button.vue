@@ -1,19 +1,26 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-03 08:07:58
- * @LastEditTime: 2020-12-03 11:44:51
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-03 23:59:16
+ * @LastEditors: wynn-w
  * @Description: Button组件
  * @FilePath: \ikon-UI\src\components\button.vue
 -->
 <template>
   <div>
-    <button class="j-button f-box" :class="{ [`icon-${iconPosition}`]: true }">
-      <j-icon :name="icon" class="_icon" v-if="icon"></j-icon>
+    <!-- <button class="j-button f-box" :class="{ [`icon-${iconPosition}`]: true }" @click="emitClick"> -->
+    <button
+      class="j-button f-box"
+      :class="{ [`icon-${iconPosition}`]: true }"
+      @click="$emit('show', loading)"
+    >
+      <j-icon :name="icon" v-if="icon && !loading" class="_icon"></j-icon>
+      <j-icon name="loading" v-if="loading" class="_icon loading"></j-icon>
       <div class="content">
         <slot></slot>
       </div>
     </button>
+    {{loading}}
   </div>
 </template>
 
@@ -30,6 +37,10 @@ export default {
         return !(value !== "left" && value !== "right");
       },
     },
+    loading: {
+      type: Boolean,
+      default: false,
+    },
   },
   components: {
     "j-icon": Icon,
@@ -37,11 +48,20 @@ export default {
   data() {
     return {};
   },
+  methods: {},
   mounted() {},
 };
 </script>
 
 <style lang="scss">
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 .f-box {
   display: flex;
   flex-direction: row;
@@ -87,6 +107,9 @@ export default {
       margin-left: 0.3em;
       margin-right: 0;
     }
+  }
+  .loading {
+    animation: spin 2s infinite linear;
   }
 }
 </style>
