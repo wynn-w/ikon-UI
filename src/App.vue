@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-01 22:10:50
- * @LastEditTime: 2020-12-03 23:57:11
+ * @LastEditTime: 2020-12-04 00:40:00
  * @LastEditors: wynn-w
  * @Description: In User Settings Edit
  * @FilePath: \ikon-UI\src\App.vue
@@ -37,9 +37,9 @@
           </div>
           <div class="btn-box_show-item">
             <j-button
-              :loading="true"
+              :loading="isLoding1"
               iconPosition="right"
-              @show = "showdata"
+              @show="isLoding1 = !isLoding1"
               >设置</j-button
             >
           </div>
@@ -58,14 +58,10 @@ export default {
   },
   data() {
     return {
-      sum: 0,
+      isLoding1: true,
     };
   },
-  methods: {
-    showdata(value){
-      console.log("showdata",value)
-    }
-  },
+  methods: {},
 };
 </script>
 

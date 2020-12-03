@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-03 08:07:58
- * @LastEditTime: 2020-12-03 23:59:16
+ * @LastEditTime: 2020-12-04 00:34:55
  * @LastEditors: wynn-w
  * @Description: Button组件
  * @FilePath: \ikon-UI\src\components\button.vue
@@ -12,7 +12,7 @@
     <button
       class="j-button f-box"
       :class="{ [`icon-${iconPosition}`]: true }"
-      @click="$emit('show', loading)"
+      @click="$emit('show', showLoading)"
     >
       <j-icon :name="icon" v-if="icon && !loading" class="_icon"></j-icon>
       <j-icon name="loading" v-if="loading" class="_icon loading"></j-icon>
@@ -20,7 +20,6 @@
         <slot></slot>
       </div>
     </button>
-    {{loading}}
   </div>
 </template>
 
@@ -46,10 +45,14 @@ export default {
     "j-icon": Icon,
   },
   data() {
-    return {};
+    return {
+      showLoading:this.loading
+    };
   },
   methods: {},
-  mounted() {},
+  mounted() {
+    // console.log(this.showLoading);
+  },
 };
 </script>
 
