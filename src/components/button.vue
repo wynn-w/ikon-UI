@@ -1,19 +1,15 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-03 08:07:58
- * @LastEditTime: 2020-12-03 10:02:18
+ * @LastEditTime: 2020-12-03 11:44:51
  * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
+ * @Description: Button组件
  * @FilePath: \ikon-UI\src\components\button.vue
 -->
 <template>
   <div>
     <button class="j-button f-box" :class="{ [`icon-${iconPosition}`]: true }">
-      <div class="_icon">
-        <svg v-if="icon" class="icon" aria-hidden="true">
-          <use :xlink:href="`#i-${icon}`"></use>
-        </svg>
-      </div>
+      <j-icon :name="icon" class="_icon" v-if="icon"></j-icon>
       <div class="content">
         <slot></slot>
       </div>
@@ -22,6 +18,7 @@
 </template>
 
 <script>
+import Icon from "./icon";
 export default {
   name: "j-button",
   props: {
@@ -29,10 +26,13 @@ export default {
     iconPosition: {
       type: String,
       default: "left",
-      validator(value){
-        return !(value !== "left" && value !== "right")
-      }
+      validator(value) {
+        return !(value !== "left" && value !== "right");
+      },
     },
+  },
+  components: {
+    "j-icon": Icon,
   },
   data() {
     return {};
@@ -88,9 +88,5 @@ export default {
       margin-right: 0;
     }
   }
-}
-.icon {
-  width: 1rem;
-  height: 1rem;
 }
 </style>
