@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-01 22:10:50
- * @LastEditTime: 2020-12-03 08:38:21
+ * @LastEditTime: 2020-12-03 09:41:17
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \ikon-UI\src\App.vue
@@ -12,14 +12,23 @@
       <div class="btn-box_simple">
         <p>普通按钮</p>
         <div class="btn-box_show">
-          <j-button class="right">按钮</j-button>
-          <j-button>按钮</j-button>
+          <div class="btn-box_show-item">
+            <j-button>按钮</j-button>
+          </div>
+          <div class="btn-box_show-item">
+            <j-button>按钮</j-button>
+          </div>
         </div>
       </div>
       <div class="btn-box_icon">
         <p>带图标按钮</p>
         <div class="btn-box_show">
-          <j-button icon="setting">设置</j-button>
+          <div class="btn-box_show-item">
+            <j-button icon="setting">设置</j-button>
+          </div>
+          <div class="btn-box_show-item">
+            <j-button icon="setting" iconPosition="right">设置</j-button>
+          </div>
         </div>
       </div>
     </div>
@@ -49,13 +58,13 @@ export default {
   .btn-box_icon {
     margin: 1em;
   }
-  .btn-box_show{
+  .btn-box_show {
     display: flex;
     flex-direction: row;
     margin-top: .5em;
   }
 }
-.right{
-  margin-right: 1em;
+.btn-box_show-item{
+  margin-right: .5em;
 }
 </style>
