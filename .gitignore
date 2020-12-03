@@ -1,5 +1,5 @@
-.cache/
-.vscode/
-dist/
+/.cache/
+/.vscode/
+/dist/
 node_modules/
 
