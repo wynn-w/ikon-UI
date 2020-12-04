@@ -14,7 +14,12 @@
 <script>
 export default {
     name: "g-button-group",
-    props:[]
+    mounted(){
+     for(const node of this.$el.children){
+       const name = node.nodeName.toLowerCase()
+       name != "button" && console.warn(`j-button-group组件内的子元素存在 ${name} 标签,必须全为 button 标签！`)
+     }
+    }
 }
 </script>
 
