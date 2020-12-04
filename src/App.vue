@@ -1,10 +1,9 @@
 <!--
- * @Author: your name
+ * @Author: wynn-w
+ * @Description: 
  * @Date: 2020-12-01 22:10:50
- * @LastEditTime: 2020-12-04 00:40:00
+ * @LastEditTime: 2020-12-04 17:49:26
  * @LastEditors: wynn-w
- * @Description: In User Settings Edit
- * @FilePath: \ikon-UI\src\App.vue
 -->
 <template>
   <div id="app">
@@ -35,13 +34,41 @@
           <div class="btn-box_show-item">
             <j-button :loading="true" iconPosition="right">设置</j-button>
           </div>
+        </div>
+      </div>
+      <div class="btn-box_icon">
+        <p>点击切换加载按钮</p>
+        <div class="btn-box_show">
           <div class="btn-box_show-item">
             <j-button
               :loading="isLoding1"
               iconPosition="right"
               @show="isLoding1 = !isLoding1"
+              title="点击出现/隐藏loading"
               >设置</j-button
             >
+          </div>
+          <div class="btn-box_show-item">
+            <j-button
+              icon="setting"
+              :loading="isLoding2"
+              iconPosition="right"
+              @show="isLoding2 = !isLoding2"
+              title="点击出现/隐藏loading"
+              >设置</j-button
+            >
+          </div>
+        </div>
+      </div>
+      <div class="btn-box_icon">
+        <p>成组按钮</p>
+        <div class="btn-box_show">
+          <div class="btn-box_show-item">
+            <j-button-group>
+              <j-button icon="left">上一页</j-button>
+              <j-button>更多</j-button>
+              <j-button icon="right" iconPosition="right">下一页</j-button>
+            </j-button-group>
           </div>
         </div>
       </div>
@@ -51,14 +78,17 @@
 
 <script>
 import jButton from "./components/button";
+import jButtonGoup from "./components/buttonGroup";
 export default {
   name: "app",
   components: {
     "j-button": jButton,
+    "j-button-group": jButtonGoup,
   },
   data() {
     return {
       isLoding1: true,
+      isLoding2: false,
     };
   },
   methods: {},
