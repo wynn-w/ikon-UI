@@ -1,14 +1,12 @@
 <!--
- * @Author: your name
- * @Date: 2020-12-03 08:07:58
- * @LastEditTime: 2020-12-04 00:34:55
+ * @Author: wynn-w
+ * @Description: 
+ * @Date: 2020-12-03 10:54:15
+ * @LastEditTime: 2020-12-04 17:48:47
  * @LastEditors: wynn-w
- * @Description: Button组件
- * @FilePath: \ikon-UI\src\components\button.vue
 -->
+
 <template>
-  <div>
-    <!-- <button class="j-button f-box" :class="{ [`icon-${iconPosition}`]: true }" @click="emitClick"> -->
     <button
       class="j-button f-box"
       :class="{ [`icon-${iconPosition}`]: true }"
@@ -20,7 +18,6 @@
         <slot></slot>
       </div>
     </button>
-  </div>
 </template>
 
 <script>
@@ -66,7 +63,8 @@ export default {
   }
 }
 .f-box {
-  display: flex;
+  display: inline-flex;
+  vertical-align: middle;
   flex-direction: row;
   justify-content: center;
   align-items: center;
