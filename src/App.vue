@@ -2,7 +2,7 @@
  * @Author: wynn-w
  * @Description: 
  * @Date: 2020-12-01 22:10:50
- * @LastEditTime: 2020-12-07 22:17:39
+ * @LastEditTime: 2020-12-07 23:14:42
  * @LastEditors: wynn-w
 -->
 <template>
@@ -84,7 +84,7 @@
         </div>
       </div>
     </div>
-    <div id="test"></div>
+    <div id="test" ></div>
   </div>
 </template>
 
