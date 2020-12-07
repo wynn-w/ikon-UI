@@ -2,7 +2,7 @@
  * @Author: wynn-w
  * @Description: 
  * @Date: 2020-12-01 22:10:50
- * @LastEditTime: 2020-12-04 18:13:07
+ * @LastEditTime: 2020-12-07 22:17:39
  * @LastEditors: wynn-w
 -->
 <template>
@@ -72,19 +72,25 @@
           </div>
         </div>
       </div>
+      <div class="btn-box_icon">
+        <p>圆型按钮</p>
+        <div class="btn-box_show">
+          <div class="btn-box_show-item">
+              <j-button icon="edit" circle></j-button>
+          </div>
+          <div class="btn-box_show-item">
+              <j-button icon="delete" circle></j-button>
+          </div>
+        </div>
+      </div>
     </div>
+    <div id="test"></div>
   </div>
 </template>
 
 <script>
-import jButton from "./components/button";
-import jButtonGoup from "./components/buttonGroup";
 export default {
   name: "app",
-  components: {
-    "j-button": jButton,
-    "j-button-group": jButtonGoup,
-  },
   data() {
     return {
       isLoding1: true,
