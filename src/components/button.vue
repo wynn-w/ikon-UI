@@ -2,26 +2,32 @@
  * @Author: wynn-w
  * @Description: 
  * @Date: 2020-12-03 10:54:15
- * @LastEditTime: 2020-12-04 17:48:47
+ * @LastEditTime: 2020-12-07 22:07:31
  * @LastEditors: wynn-w
 -->
 
 <template>
-    <button
-      class="j-button f-box"
-      :class="{ [`icon-${iconPosition}`]: true }"
-      @click="$emit('show', showLoading)"
-    >
-      <j-icon :name="icon" v-if="icon && !loading" class="_icon"></j-icon>
-      <j-icon name="loading" v-if="loading" class="_icon loading"></j-icon>
-      <div class="content">
-        <slot></slot>
-      </div>
-    </button>
+  <button
+    class="j-button f-box"
+    :class="[
+      { [`icon-${iconPosition}`]: true },
+      {
+        circle: circle,
+      },
+    ]"
+    @click="$emit('show', showLoading)"
+  >
+    <j-icon :name="icon" v-if="icon && !loading" class="_icon"></j-icon>
+    <j-icon name="loading" v-if="loading" class="_icon loading"></j-icon>
+    <div class="content" v-if="!circle">
+      <slot></slot>
+    </div>
+  </button>
 </template>
 
 <script>
 import Icon from "./icon";
+import attributeValue from '../plug/getAttribute'
 export default {
   name: "j-button",
   props: {
@@ -37,18 +43,31 @@ export default {
       type: Boolean,
       default: false,
     },
+    circle: { type: Boolean, default: false },
   },
   components: {
     "j-icon": Icon,
   },
   data() {
     return {
-      showLoading:this.loading
+      showLoading: this.loading,
     };
   },
   methods: {},
+  // computed:{}
   mounted() {
-    // console.log(this.showLoading);
+    const _className = this.$el.className;
+    const _classList = this.$el.classList
+    _className.match(/circle/g) &&
+      (() => {
+        _classList.remove(_className.match(/icon-(left|right)/g));
+        _classList.add("padding-0");
+        const farther = this.$el
+        const child = this.$el.children[0]
+        child.style.setProperty("margin", "0")
+        farther.style.setProperty("width", "32px")
+        farther.style.setProperty("height", "32px")
+      })();
   },
 };
 </script>
@@ -109,8 +128,17 @@ export default {
       margin-right: 0;
     }
   }
+
   .loading {
     animation: spin 2s infinite linear;
   }
+}
+.circle {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+}
+.padding-0 {
+  padding: 0;
 }
 </style>
