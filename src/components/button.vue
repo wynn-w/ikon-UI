@@ -2,7 +2,7 @@
  * @Author: wynn-w
  * @Description: 
  * @Date: 2020-12-03 10:54:15
- * @LastEditTime: 2020-12-07 22:07:31
+ * @LastEditTime: 2020-12-09 17:16:55
  * @LastEditors: wynn-w
 -->
 
@@ -26,13 +26,13 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import Icon from "./icon";
-import attributeValue from '../plug/getAttribute'
 export default {
   name: "j-button",
   props: {
     icon: {},
-    iconPosition: {
+    iconPosition: { 
       type: String,
       default: "left",
       validator(value) {

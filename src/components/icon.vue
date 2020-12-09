@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-03 11:28:11
- * @LastEditTime: 2020-12-03 11:43:34
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-07 22:19:42
+ * @LastEditors: wynn-w
  * @Description: 将SVG抽出来，方便后面复用，以及简化使用代码
  * @FilePath: \ikon-UI\src\components\icon.vue
 -->
@@ -28,7 +28,7 @@ export default {
 
 <style>
 .icon {
-  width: 1rem;
-  height: 1rem;
+  width: 1em;
+  height: 1em;
 }
 </style>

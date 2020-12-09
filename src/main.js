@@ -2,7 +2,7 @@
  * @Author: wynn-w
  * @Description: 
  * @Date: 2020-12-03 10:51:31
- * @LastEditTime: 2020-12-08 23:40:47
+ * @LastEditTime: 2020-12-09 14:29:04
  * @LastEditors: wynn-w
  */
 import Vue from 'vue';
@@ -66,14 +66,13 @@ try {
         const Constructor = Vue.extend(Button)
         const button = new Constructor({
             propsData: {
-                loading: true,
-                circle: true
+                loading: false,
+                icon: "delete"
             }
         })
         button.$mount(div)
-        const [ClassName] = button.$el.querySelector("svg").className.baseVal.match(/loading/g)
-        // console.log(ClassName);
-        expect(ClassName).to.equal("loading");
+        const ClassName = button.$el.querySelector("svg").classList.contains("loading")
+        expect(ClassName).to.equal(false);
         button.$el.remove()
         button.$destroy()
     }
@@ -100,10 +99,5 @@ try {
     window.errors = [error]
 }
 finally {
-    window.errors && (function () {
-        const length = window.errors.length
-        for (let i = 0; i < length; i++) {
-            console.error(window.errors[i].message)
-        }
-    })()
+    window.errors && console.error(window.errors[0].message)
 }
