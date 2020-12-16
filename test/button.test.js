@@ -2,7 +2,7 @@
  * @Author: wynn-w
  * @Description: 
  * @Date: 2020-12-09 14:50:05
- * @LastEditTime: 2020-12-09 23:46:11
+ * @LastEditTime: 2020-12-16 23:02:56
  * @LastEditors: wynn-w
  */
 const expect = chai.expect;
@@ -19,19 +19,19 @@ Vue.config.devtools = false
 // });
 describe('Button', () => {
 
-  // it('存在.', () => {
-  //   expect(Button).to.exist
-  // })
+  it('存在.', () => {
+    expect(Button).to.exist
+  })
 
   it('可以设置icon.', () => {
     const Constructor = Vue.extend(Button)
     const vm = new Constructor({
       propsData: {
-        icon: 'settings'
+        icon: 'setting'
       }
     }).$mount()
     const useElement = vm.$el.querySelector('use')
-    expect(useElement.getAttribute('xlink:href')).to.equal('#i-seteddtings')
+    expect(useElement.getAttribute('xlink:href')).to.equal('#i-setting')
     vm.$destroy()
   })
 
@@ -39,7 +39,7 @@ describe('Button', () => {
     const Constructor = Vue.extend(Button)
     const vm = new Constructor({
       propsData: {
-        icon: 'settings',
+        icon: 'setting',
         loading: true
       }
     }).$mount()
@@ -55,7 +55,7 @@ describe('Button', () => {
     const Constructor = Vue.extend(Button)
     const vm = new Constructor({
       propsData: {
-        icon: 'settings',
+        icon: 'setting',
       }
     }).$mount(div)
     const icon = vm.$el.querySelector('svg')
@@ -70,7 +70,7 @@ describe('Button', () => {
     const Constructor = Vue.extend(Button)
     const vm = new Constructor({
       propsData: {
-        icon: 'settings',
+        icon: 'setting',
         iconPosition: 'right'
       }
     }).$mount(div)
@@ -83,7 +83,7 @@ describe('Button', () => {
     const Constructor = Vue.extend(Button)
     const vm = new Constructor({
       propsData: {
-        icon: 'settings',
+        icon: 'setting',
       }
     }).$mount()
 
