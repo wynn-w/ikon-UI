@@ -1,8 +1,8 @@
 {
   "name": "ikon-ui",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "一个UI框架",
-  "main": "src/main.js",
+  "main": "index.js",
   "scripts": {
     "start": "parcel public/index.html --no-cache",
     "test": "parcel build test/* --no-cache --no-minify && karma start --single run",
