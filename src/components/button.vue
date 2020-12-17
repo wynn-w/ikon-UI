@@ -2,7 +2,7 @@
  * @Author: wynn-w
  * @Description: 
  * @Date: 2020-12-03 10:54:15
- * @LastEditTime: 2020-12-09 17:16:55
+ * @LastEditTime: 2020-12-17 09:39:37
  * @LastEditors: wynn-w
 -->
 
@@ -15,7 +15,7 @@
         circle: circle,
       },
     ]"
-    @click="$emit('show', showLoading)"
+    @click="$emit('click')"
   >
     <j-icon :name="icon" v-if="icon && !loading" class="_icon"></j-icon>
     <j-icon name="loading" v-if="loading" class="_icon loading"></j-icon>
@@ -49,9 +49,7 @@ export default {
     "j-icon": Icon,
   },
   data() {
-    return {
-      showLoading: this.loading,
-    };
+    return {};
   },
   methods: {},
   // computed:{}

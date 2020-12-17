@@ -2,7 +2,7 @@
  * @Author: wynn-w
  * @Description: 
  * @Date: 2020-12-01 22:10:50
- * @LastEditTime: 2020-12-08 22:25:27
+ * @LastEditTime: 2020-12-17 09:41:31
  * @LastEditors: wynn-w
 -->
 <template>
@@ -43,7 +43,7 @@
             <j-button
               :loading="isLoding1"
               iconPosition="right"
-              @show="isLoding1 = !isLoding1"
+              @click="isLoding1 = !isLoding1"
               title="点击出现/隐藏loading"
               >设置</j-button
             >
@@ -53,7 +53,7 @@
               icon="setting"
               :loading="isLoding2"
               iconPosition="right"
-              @show="isLoding2 = !isLoding2"
+              @click="isLoding2 = !isLoding2"
               title="点击出现/隐藏loading"
               >设置</j-button
             >
