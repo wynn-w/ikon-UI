@@ -2,7 +2,7 @@
  * @Author: wynn-w
  * @Description: 
  * @Date: 2020-12-09 14:47:17
- * @LastEditTime: 2020-12-17 09:49:30
+ * @LastEditTime: 2020-12-17 13:05:16
  * @LastEditors: wynn-w
  */
 module.exports = function (config) {
@@ -65,7 +65,7 @@ module.exports = function (config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'], //'Chrome_without_security'
+    browsers: ['ChromeHeadless'], //'Chrome_without_security'/'Chrome'
 
     customLaunchers: {
       Chrome_without_security: {
