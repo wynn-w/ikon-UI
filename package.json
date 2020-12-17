@@ -5,10 +5,10 @@
   "main": "src/main.js",
   "scripts": {
     "start": "parcel public/index.html --no-cache",
-    "dev-test": "parcel watch test/* --no-cache & karma start",
     "test": "parcel build test/* --no-cache --no-minify && karma start --single run",
-    "test-karma": "karma start ./karma.conf.js"
-  }, 
+    "dev-test": "parcel watch test/* --no-cache & karma start",
+    "karma": "karma start ./karma.conf.js"
+  },
   "alias": {
     "vue": "./node_modules/vue/dist/vue.common.js"
   },
