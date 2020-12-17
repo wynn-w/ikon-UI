@@ -1,6 +1,7 @@
-anguage: node_jsscript
-node_jsscript:
-  - "8"
+anguage: node_js
+node_js:
+  - "11"
+  - "12"
 addons:
   chrome: stable
 sudo: required
