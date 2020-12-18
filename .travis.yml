@@ -4,8 +4,7 @@ node_js:
   - "12"
 addons:
   chrome: stable
-before_install:
- - travis_wait 30 pip install scipy
+install: travis_wait mvn install
 sudo: required
 before_script:
   - "sudo chown root /opt/google/chrome/chrome-sandbox"
