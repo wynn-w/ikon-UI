@@ -11,6 +11,7 @@ install:
   - npm install
 scripts:
   - npm run test
+  - travis_wait 10
 sudo: required
 # before_script:
 #   - "sudo chown root /opt/google/chrome/chrome-sandbox"
