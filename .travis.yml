@@ -7,10 +7,11 @@ addons:
 cache:
   directories:
     - node_modules
-scripts:
+install:
   - npm install
+scripts:
   - npm run test
 sudo: required
-before_script:
-  - "sudo chown root /opt/google/chrome/chrome-sandbox"
-  - "sudo chmod 4755 /opt/google/chrome/chrome-sandbox"
+# before_script:
+#   - "sudo chown root /opt/google/chrome/chrome-sandbox"
+#   - "sudo chmod 4755 /opt/google/chrome/chrome-sandbox"
