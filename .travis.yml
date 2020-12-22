@@ -1,4 +1,4 @@
-anguage: node_js
+language: node_js
 node_js:
   - "11"
   - "12"
@@ -9,10 +9,10 @@ cache:
     - node_modules
 install:
   - npm install
-scripts:
+script:
   - npm run test
   - travis_wait 10
-sudo: required
-# before_script:
-#   - "sudo chown root /opt/google/chrome/chrome-sandbox"
-#   - "sudo chmod 4755 /opt/google/chrome/chrome-sandbox"
+sudo: true
+before_script:
+  - "sudo chown root /opt/google/chrome/chrome-sandbox"
+  - "sudo chmod 4755 /opt/google/chrome/chrome-sandbox"
