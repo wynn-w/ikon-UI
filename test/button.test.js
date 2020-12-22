@@ -2,7 +2,7 @@
  * @Author: wynn-w
  * @Description: 
  * @Date: 2020-12-09 14:50:05
- * @LastEditTime: 2020-12-17 09:39:47
+ * @LastEditTime: 2020-12-22 23:03:44
  * @LastEditors: wynn-w
  */
 const expect = chai.expect;
@@ -11,12 +11,6 @@ import Button from '../src/components/button.vue'
 
 Vue.config.productionTip = false
 Vue.config.devtools = false
-// describe('A spec suite', function() {
-//   it('isNum() should work fine.', function() {
-//     expect(isNum(1)).toBe(true)
-//     expect(isNum('1')).toBe(false)
-//   })
-// });
 describe('Button', () => {
 
   it('存在.', () => {
@@ -91,6 +85,6 @@ describe('Button', () => {
     vm.$on('click', callback)
     vm.$el.click()
     expect(callback).to.have.been.called
-
+    vm.$destroy()
   })
 })
