@@ -2,7 +2,7 @@
  * @Author: wynn-w
  * @Description: 
  * @Date: 2020-12-09 14:47:17
- * @LastEditTime: 2020-12-27 11:44:34
+ * @LastEditTime: 2020-12-27 11:53:57
  * @LastEditors: wynn-w
  */
 module.exports = function (config) {
@@ -72,14 +72,16 @@ module.exports = function (config) {
       //   base: 'Chrome',
       //   flags: ['--disable-web-security', '--disable-site-isolation-trials']
       // },
-      HeadlessChrome:{
+      HeadlessChrome: {
         base: 'ChromeHeadless',
-        flags: ['--no-sandbox']
+        flags: ['--no-sandbox',
+          // '--user-data-dir=/tmp/chrome-test-profile',
+          '--disable-web-security']
       }
     },
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false,
+    singleRun: true,
     detached: false,
     // Concurrency level
     // how many browser should be started simultaneous
