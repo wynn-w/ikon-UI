@@ -2,7 +2,7 @@
  * @Author: wynn-w
  * @Description: 
  * @Date: 2020-12-09 14:47:17
- * @LastEditTime: 2020-12-17 13:05:16
+ * @LastEditTime: 2020-12-27 11:44:34
  * @LastEditors: wynn-w
  */
 module.exports = function (config) {
@@ -68,9 +68,13 @@ module.exports = function (config) {
     browsers: ['ChromeHeadless'], //'Chrome_without_security'/'Chrome'
 
     customLaunchers: {
-      Chrome_without_security: {
-        base: 'Chrome',
-        flags: ['--disable-web-security', '--disable-site-isolation-trials']
+      // Chrome_without_security: {
+      //   base: 'Chrome',
+      //   flags: ['--disable-web-security', '--disable-site-isolation-trials']
+      // },
+      HeadlessChrome:{
+        base: 'ChromeHeadless',
+        flags: ['--no-sandbox']
       }
     },
     // Continuous Integration mode
