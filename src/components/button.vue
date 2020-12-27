@@ -2,7 +2,7 @@
  * @Author: wynn-w
  * @Description: 
  * @Date: 2020-12-03 10:54:15
- * @LastEditTime: 2020-12-17 09:39:37
+ * @LastEditTime: 2020-12-27 22:40:20
  * @LastEditors: wynn-w
 -->
 
@@ -95,6 +95,7 @@ export default {
   border: 0.1rem solid var(--border-color);
   background: var(--button-bg);
   color: var(--button-color);
+  line-height: var(--font-size);
   &:hover {
     opacity: 0.8;
   }
