@@ -1,12 +1,12 @@
 <!--
- * @Description: j-button组件容器
+ * @Description: ik-button组件容器
  * @Author: wynn-w
  * @Date: 2020-12-03 20:41:33
  * @Do not edit: 2020-12-03 21:10:00
  * @LastEditors: wynn-w
 -->
 <template>
-  <div class="j-button-group">
+  <div class="ik-button-group">
       <slot></slot>
   </div>
 </template>
@@ -17,17 +17,17 @@ export default {
     mounted(){
      for(const node of this.$el.children){
        const name = node.nodeName.toLowerCase()
-       name != "button" && console.warn(`j-button-group组件内的子元素存在 ${name} 标签,必须全为 button 标签！`)
+       name != "button" && console.warn(`ik-button-group组件内的子元素存在 ${name} 标签,必须全为 button 标签！`)
      }
     }
 }
 </script>
 
 <style lang="scss">
-.j-button-group{
+.ik-button-group{
   display: inline-flex;
   vertical-align: middle;
-  > .j-button {
+  > .ik-button {
     border-radius: 0;
     &:not(:last-child){
       border-top: 0;

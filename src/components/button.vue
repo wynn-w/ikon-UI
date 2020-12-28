@@ -2,13 +2,13 @@
  * @Author: wynn-w
  * @Description: 
  * @Date: 2020-12-03 10:54:15
- * @LastEditTime: 2020-12-27 22:40:20
+ * @LastEditTime: 2020-12-28 23:19:36
  * @LastEditors: wynn-w
 -->
 
 <template>
   <button
-    class="j-button f-box"
+    class="ik-button f-box"
     :class="[
       { [`icon-${iconPosition}`]: true },
       {
@@ -17,8 +17,8 @@
     ]"
     @click="$emit('click')"
   >
-    <j-icon :name="icon" v-if="icon && !loading" class="_icon"></j-icon>
-    <j-icon name="loading" v-if="loading" class="_icon loading"></j-icon>
+    <ik-icon :name="icon" v-if="icon && !loading" class="_icon"></ik-icon>
+    <ik-icon name="loading" v-if="loading" class="_icon loading"></ik-icon>
     <div class="content" v-if="!circle">
       <slot></slot>
     </div>
@@ -29,7 +29,7 @@
 import Vue from 'vue'
 import Icon from "./icon";
 export default {
-  name: "j-button",
+  name: "ik-button",
   props: {
     icon: {},
     iconPosition: { 
@@ -46,7 +46,7 @@ export default {
     circle: { type: Boolean, default: false },
   },
   components: {
-    "j-icon": Icon,
+    "ik-icon": Icon,
   },
   data() {
     return {};
@@ -87,7 +87,7 @@ export default {
   align-items: center;
 }
 
-.j-button {
+.ik-button {
   font-size: var(--font-size);
   height: var(--button-height);
   padding: 0 1rem;

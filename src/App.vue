@@ -2,7 +2,7 @@
  * @Author: wynn-w
  * @Description: 
  * @Date: 2020-12-01 22:10:50
- * @LastEditTime: 2020-12-17 09:41:31
+ * @LastEditTime: 2020-12-28 23:18:51
  * @LastEditors: wynn-w
 -->
 <template>
@@ -12,10 +12,10 @@
         <p>普通按钮</p>
         <div class="btn-box_show">
           <div class="btn-box_show-item">
-            <j-button>按钮</j-button>
+            <ik-button>按钮</ik-button>
           </div>
           <div class="btn-box_show-item">
-            <j-button>按钮</j-button>
+            <ik-button>按钮</ik-button>
           </div>
         </div>
       </div>
@@ -23,16 +23,16 @@
         <p>带图标按钮</p>
         <div class="btn-box_show">
           <div class="btn-box_show-item">
-            <j-button icon="setting">设置</j-button>
+            <ik-button icon="setting">设置</ik-button>
           </div>
           <div class="btn-box_show-item">
-            <j-button icon="setting" iconPosition="right">设置</j-button>
+            <ik-button icon="setting" iconPosition="right">设置</ik-button>
           </div>
           <div class="btn-box_show-item">
-            <j-button :loading="true" iconPosition="left">设置</j-button>
+            <ik-button :loading="true" iconPosition="left">设置</ik-button>
           </div>
           <div class="btn-box_show-item">
-            <j-button :loading="true" iconPosition="right">设置</j-button>
+            <ik-button :loading="true" iconPosition="right">设置</ik-button>
           </div>
         </div>
       </div>
@@ -40,22 +40,22 @@
         <p>点击切换加载按钮</p>
         <div class="btn-box_show">
           <div class="btn-box_show-item">
-            <j-button
+            <ik-button
               :loading="isLoding1"
               iconPosition="right"
               @click="isLoding1 = !isLoding1"
               title="点击出现/隐藏loading"
-              >设置</j-button
+              >设置</ik-button
             >
           </div>
           <div class="btn-box_show-item">
-            <j-button
+            <ik-button
               icon="setting"
               :loading="isLoding2"
               iconPosition="right"
               @click="isLoding2 = !isLoding2"
               title="点击出现/隐藏loading"
-              >设置</j-button
+              >设置</ik-button
             >
           </div>
         </div>
@@ -64,11 +64,11 @@
         <p>成组按钮</p>
         <div class="btn-box_show">
           <div class="btn-box_show-item">
-            <j-button-group>
-              <j-button icon="left">上一页</j-button>
-              <j-button>更多</j-button>
-              <j-button icon="right" iconPosition="right">下一页</j-button>
-            </j-button-group>
+            <ik-button-group>
+              <ik-button icon="left">上一页</ik-button>
+              <ik-button>更多</ik-button>
+              <ik-button icon="right" iconPosition="right">下一页</ik-button>
+            </ik-button-group>
           </div>
         </div>
       </div>
@@ -76,10 +76,10 @@
         <p>圆型按钮</p>
         <div class="btn-box_show">
           <div class="btn-box_show-item">
-              <j-button icon="edit" circle></j-button>
+              <ik-button icon="edit" circle></ik-button>
           </div>
           <div class="btn-box_show-item">
-              <j-button icon="delete" circle></j-button>
+              <ik-button icon="delete" circle></ik-button>
           </div>
         </div>
       </div>
