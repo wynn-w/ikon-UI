@@ -1,6 +1,11 @@
 <template>
-  <div class="wrapper" :class="{error}">
-    <input :value="value" :disabled="disabled" type="text" />
+  <div class="wrapper" :class="{ error }">
+    <input
+      :value="value"
+      :disabled="disabled"
+      :readonly="readonly"
+      type="text"
+    />
   </div>
 </template>
 
@@ -9,19 +14,19 @@ export default {
   name: "IkInput",
   props: {
     value: {
-      type: String
+      type: String,
     },
     disabled: {
       type: Boolean,
-      defalut: false
+      defalut: false,
     },
     readonly: {
       type: Boolean,
-      defalut: false
+      defalut: false,
     },
-    error:{
-        type: String
-    }
+    error: {
+      type: String,
+    },
   },
 };
 </script>
@@ -33,14 +38,14 @@ $border-color-hover: #666;
 $border-radius: 0.3333em;
 $font-size: 1em;
 $box-shadoww-color: rgba(0, 0, 0, 0.5);
-$red: #F1453E;
+$red: #f1453e;
 .wrapper {
   font-size: $font-size;
   display: inline-block;
-  &.error{
-      > input{
-          border-color: $red;
-      }
+  &.error {
+    > input {
+      border-color: $red;
+    }
   }
   > input {
     height: $height;
@@ -55,7 +60,7 @@ $red: #F1453E;
       box-shadow: inset 0 1px 3px $box-shadoww-color;
     }
     &[disabled],
-    &[disabled] {
+    &[readonly] {
       border-color: #bbb;
       color: #bbb;
       cursor: not-allowed;
