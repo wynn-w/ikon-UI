@@ -1,20 +1,7 @@
-<!--
- * @Author: wynn-w
- * @Description: 
- * @Date: 2020-12-03 10:54:15
- * @LastEditTime: 2020-12-28 23:19:36
- * @LastEditors: wynn-w
--->
-
 <template>
   <button
     class="ik-button f-box"
-    :class="[
-      { [`icon-${iconPosition}`]: true },
-      {
-        circle: circle,
-      },
-    ]"
+    :class="[{ [`icon-${iconPosition}`]: true }, { circle }]"
     @click="$emit('click')"
   >
     <ik-icon :name="icon" v-if="icon && !loading" class="_icon"></ik-icon>
@@ -26,13 +13,13 @@
 </template>
 
 <script>
-import Vue from 'vue'
+import Vue from "vue";
 import Icon from "./icon";
 export default {
-  name: "ik-button",
+  name: "IkButton",
   props: {
     icon: {},
-    iconPosition: { 
+    iconPosition: {
       type: String,
       default: "left",
       validator(value) {
@@ -52,19 +39,18 @@ export default {
     return {};
   },
   methods: {},
-  // computed:{}
   mounted() {
     const _className = this.$el.className;
-    const _classList = this.$el.classList
+    const _classList = this.$el.classList;
     _className.match(/circle/g) &&
       (() => {
         _classList.remove(_className.match(/icon-(left|right)/g));
         _classList.add("padding-0");
-        const farther = this.$el
-        const child = this.$el.children[0]
-        child.style.setProperty("margin", "0")
-        farther.style.setProperty("width", "32px")
-        farther.style.setProperty("height", "32px")
+        const farther = this.$el;
+        const child = this.$el.children[0];
+        child.style.setProperty("margin", "0");
+        farther.style.setProperty("width", "32px");
+        farther.style.setProperty("height", "32px");
       })();
   },
 };

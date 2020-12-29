@@ -1,10 +1,3 @@
-<!--
- * @Description: ik-button组件容器
- * @Author: wynn-w
- * @Date: 2020-12-03 20:41:33
- * @Do not edit: 2020-12-03 21:10:00
- * @LastEditors: wynn-w
--->
 <template>
   <div class="ik-button-group">
       <slot></slot>
@@ -13,7 +6,7 @@
 
 <script>
 export default {
-    name: "g-button-group",
+    name: "IkButtonGroup",
     mounted(){
      for(const node of this.$el.children){
        const name = node.nodeName.toLowerCase()

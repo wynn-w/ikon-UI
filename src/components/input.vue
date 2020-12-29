@@ -6,18 +6,18 @@
 
 <script>
 export default {
-  name: "ikon-input",
+  name: "IkInput",
   props: {
     value: {
-      type: String,
+      type: String
     },
     disabled: {
       type: Boolean,
-      defalut: false,
+      defalut: false
     },
     readonly: {
       type: Boolean,
-      defalut: false,
+      defalut: false
     },
     error:{
         type: String
