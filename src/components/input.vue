@@ -5,7 +5,14 @@
       :disabled="disabled"
       :readonly="readonly"
       type="text"
+      @change="$emit('change', $event)"
+      @input="$emit('input', $event)"
+      @focus="$emit('focus', $event)"
+      @blur="$emit('blur', $event)"
     />
+    <template v-if="error">
+      <p class="message">{{ error }}</p>
+    </template>
   </div>
 </template>
 
@@ -54,7 +61,7 @@ $red: #f1453e;
     }
     &:focus {
       border-color: $border-color-hover;
-      box-shadow:  0 0 0.25em $box-shadow-color;
+      box-shadow: 0 0 0.25em $box-shadow-color;
     }
     &[disabled],
     &[readonly] {
@@ -67,9 +74,13 @@ $red: #f1453e;
     > input {
       border-color: $red;
       &:focus {
-        box-shadow:  0 0 0.25em $red;
+        box-shadow: 0 0 0.25em $red;
       }
     }
+  }
+  .message {
+    font-size: 0.8333rem;
+    color: $red;
   }
 }
 </style>
