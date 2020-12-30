@@ -12,7 +12,7 @@ describe('Input', () => {
   describe('props', () => {
     const Constructor = Vue.extend(Input)
     let vm
-    afterEach(()=>{
+    afterEach(() => {
       vm.$destroy()
     })
     it('可以设置value', () => {
@@ -60,21 +60,43 @@ describe('Input', () => {
   })
   describe('event', () => {
     const Constructor = Vue.extend(Input)
-    const eventList = ['change', 'input', 'focus', 'blur']
+    const eventList = ['change', 'focus', 'blur']
     let vm
-    afterEach(()=>{
+    afterEach(() => {
       vm.$destroy()
     })
     for (const eventName of eventList) {
       it(`可以触发 ${eventName} 事件`, () => {
         vm = new Constructor({}).$mount()
         const callback = sinon.fake();
-        vm.$on(eventName, callback)
+        const callback1 = sinon.fake();
+        vm.$on(eventName, callback, callback1)
         const event = new Event(eventName)
         const useElement = vm.$el.querySelector('input')
+        Object.defineProperty(
+          event, 'target', {
+          value: { value: '通过' },
+          enumerable: true
+        }
+        )
         useElement.dispatchEvent(event)
-        expect(callback).to.have.been.calledWith(event)
+        expect(callback, callback1).to.have.been.calledWith(event, '通过')
       })
     }
+    it(`可以触发 input 事件`, () => {
+      vm = new Constructor({}).$mount()
+      const callback = sinon.fake();
+      vm.$on('input', callback)
+      const event = new Event('input')
+      const useElement = vm.$el.querySelector('input')
+      Object.defineProperty(
+        event, 'target', {
+        value: { value: '通过' },
+        enumerable: true
+      }
+      )
+      useElement.dispatchEvent(event)
+      expect(callback).to.have.been.calledWith('通过')
+    })
   })
 })
