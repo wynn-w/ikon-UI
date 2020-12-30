@@ -10,45 +10,43 @@ describe('Input', () => {
     expect(Input).to.exist
   })
   describe('props', () => {
+    const Constructor = Vue.extend(Input)
+    let vm
+    afterEach(()=>{
+      vm.$destroy()
+    })
     it('可以设置value', () => {
-      const Constructor = Vue.extend(Input)
-      const vm = new Constructor({
+      vm = new Constructor({
         propsData: {
           value: 'value'
         }
       }).$mount()
       const useElement = vm.$el.querySelector('input')
       expect(useElement.value).to.equal('value')
-      vm.$destroy()
     })
 
     it('可以设置disabled', () => {
-      const Constructor = Vue.extend(Input)
-      const vm = new Constructor({
+      vm = new Constructor({
         propsData: {
           disabled: true
         }
       }).$mount()
       const useElement = vm.$el.querySelector('input')
       expect(useElement.disabled).to.equal(true)
-      vm.$destroy()
     })
 
     it('可以设置readonly', () => {
-      const Constructor = Vue.extend(Input)
-      const vm = new Constructor({
+      vm = new Constructor({
         propsData: {
           readonly: true
         }
       }).$mount()
       const useElement = vm.$el.querySelector('input')
       expect(useElement.readOnly).to.equal(true)
-      vm.$destroy()
     })
 
     it('可以设置 error 样式', () => {
-      const Constructor = Vue.extend(Input)
-      const vm = new Constructor({
+      vm = new Constructor({
         propsData: {
           error: "错误"
         }
@@ -58,53 +56,25 @@ describe('Input', () => {
       const useElementParent = useElement.parentNode
       expect(useElementParent.classList.contains('error')).to.equal(true)
       expect(useElementP.textContent).to.equal('错误')
-      vm.$destroy()
     })
   })
   describe('event', () => {
-    it('可以触发 change 事件', () => {
-      const Constructor = Vue.extend(Input)
-      const vm = new Constructor({}).$mount()
-      const callback = sinon.fake();
-      vm.$on('change', callback)
-      const event = new Event('change')
-      const useElement = vm.$el.querySelector('input')
-      useElement.dispatchEvent(event)
-      expect(callback).to.have.been.calledWith(event)
+    const Constructor = Vue.extend(Input)
+    const eventList = ['change', 'input', 'focus', 'blur']
+    let vm
+    afterEach(()=>{
       vm.$destroy()
     })
-    it('可以触发 input 事件', () => {
-      const Constructor = Vue.extend(Input)
-      const vm = new Constructor({}).$mount()
-      const callback = sinon.fake();
-      vm.$on('input', callback)
-      const event = new Event('input')
-      const useElement = vm.$el.querySelector('input')
-      useElement.dispatchEvent(event)
-      expect(callback).to.have.been.calledWith(event)
-      vm.$destroy()
-    })
-    it('可以触发 focus 事件', () => {
-      const Constructor = Vue.extend(Input)
-      const vm = new Constructor({}).$mount()
-      const callback = sinon.fake();
-      vm.$on('focus', callback)
-      const event = new Event('focus')
-      const useElement = vm.$el.querySelector('input')
-      useElement.dispatchEvent(event)
-      expect(callback).to.have.been.calledWith(event)
-      vm.$destroy()
-    })
-    it('可以触发 blur 事件', () => {
-      const Constructor = Vue.extend(Input)
-      const vm = new Constructor({}).$mount()
-      const callback = sinon.fake();
-      vm.$on('blur', callback)
-      const event = new Event('blur')
-      const useElement = vm.$el.querySelector('input')
-      useElement.dispatchEvent(event)
-      expect(callback).to.have.been.calledWith(event)
-      vm.$destroy()
-    })
+    for (const eventName of eventList) {
+      it(`可以触发 ${eventName} 事件`, () => {
+        vm = new Constructor({}).$mount()
+        const callback = sinon.fake();
+        vm.$on(eventName, callback)
+        const event = new Event(eventName)
+        const useElement = vm.$el.querySelector('input')
+        useElement.dispatchEvent(event)
+        expect(callback).to.have.been.calledWith(event)
+      })
+    }
   })
 })
