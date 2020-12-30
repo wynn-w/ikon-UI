@@ -5,10 +5,10 @@
       :disabled="disabled"
       :readonly="readonly"
       type="text"
-      @change="$emit('change', $event)"
-      @input="$emit('input', $event)"
-      @focus="$emit('focus', $event)"
-      @blur="$emit('blur', $event)"
+      @change="$emit('change', $event, $event.target.value)"
+      @input="$emit('input', $event.target.value)"
+      @focus="$emit('focus', $event, $event.target.value)"
+      @blur="$emit('blur', $event,   $event.target.value)"
     />
     <template v-if="error">
       <p class="message">{{ error }}</p>
