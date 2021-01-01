@@ -1,5 +1,5 @@
 <template>
-  <div class="row" :style="rowStyle">
+  <div class="row" :class="rowClass" :style="rowStyle">
     <slot></slot>
   </div>
 </template>
@@ -11,6 +11,12 @@ export default {
     gutter: {
       type: [String, Number],
     },
+    align: {
+      type: String,
+      validator(value){
+        return ['left','right','center','space-between','space-around'].includes(value)
+      }
+    },
   },
   mounted() {
     for (const child of this.$children) {
@@ -19,11 +25,16 @@ export default {
   },
   computed: {
     rowStyle() {
+      const GUTTER = this.gutter
       return {
-        marginLeft: `${-this.gutter / 2}px`,
-        marginRight: `${-this.gutter / 2}px`,
+        paddingLeft: `${-GUTTER / 2}px`,
+        paddingRight: `${-GUTTER / 2}px`,
       };
     },
+    rowClass(){
+      const _align = this.align
+      return _align && `align-${_align}`
+    }
   },
 };
 </script>
@@ -33,5 +44,20 @@ export default {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
+  &.align-center{
+    justify-content: center;
+  }
+  &.align-left{
+     justify-content: flex-start;
+  }
+  &.align-right{
+     justify-content: flex-end;
+  }
+  &.align-between{
+     justify-content: space-between;
+  }
+  &.align-around{
+     justify-content: space-around;
+  }
 }
 </style>

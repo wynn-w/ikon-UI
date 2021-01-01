@@ -28,9 +28,10 @@ export default {
       ];
     },
     colStyle() {
+      const GUTTER = this.gutter
       return {
-        paddingLeft: `${this.gutter / 2}px`,
-        paddingRight: `${this.gutter / 2}px`,
+        paddingLeft: `${GUTTER / 2}px`,
+        paddingRight: `${GUTTER / 2}px`,
       };
     },
   },
@@ -40,7 +41,6 @@ export default {
 <style lang="scss">
 .col {
   min-height: 36px;
-  width: 50%;
   border-radius: 0.2em;
   $class-prefix: col-;
   @for $num from 1 through 24 {
