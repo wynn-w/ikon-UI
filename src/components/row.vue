@@ -32,8 +32,7 @@ export default {
       };
     },
     rowClass(){
-      const _align = this.align
-      return _align && `align-${_align}`
+      return this.align && `align-${this.align}`
     }
   },
 };
@@ -43,7 +42,7 @@ export default {
 .row {
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   &.align-center{
     justify-content: center;
   }
