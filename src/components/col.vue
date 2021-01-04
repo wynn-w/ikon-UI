@@ -45,16 +45,26 @@ export default {
       gutter: null,
     };
   },
+  methods:{
+    createClasses(propObj, devName = ''){
+      let array = []
+      if(!propObj){return []}
+      console.log('a'+devName);
+      propObj.span && array.push(`col-${devName}${propObj.span}`)
+      propObj.span && array.push(`offset-${devName}${propObj.offset}`)
+      return array
+    }
+  },
   computed: {
     colClasses() {
       const {span, offset, phone, ipad, pc, narrowPc, widePc} = this
+      const createClasses = this.createClasses
       return [
-        span && `col-${span}`,
-        offset && `offset-${offset}`,
-        ...(ipad ? [ipad.span && `col-ipad-${ipad.span}`, ipad.offset && `offset-ipad-${ipad.offset}`]: []),
-        ...(pc ? [pc.span && `col-pc-${pc.span}`, pc.offset && `offset-pc-${pc.offset}`]: []),
-        ...(narrowPc ? [narrowPc.span && `col-narrowPc-${narrowPc.span}`, narrowPc.offset && `offset-narrowPc-${narrowPc.offset}`]: []),
-        ...(widePc ? [widePc.span && `col-widePc-${widePc.span}`, widePc.offset && `offset-widePc-${widePc.offset}`]: []),
+        ...createClasses({span, offset}),
+        ...createClasses(ipad, 'ipad-'),
+        ...createClasses(ipad, 'narrow-pc-'),
+        ...createClasses(ipad, 'pc-'),
+        ...createClasses(ipad, 'wide-pc-'),
       ];
     },
     colStyle() {
@@ -100,12 +110,12 @@ export default {
   }
   @media (min-width: 769px) and (max-width: 992px){
     @for $num from 1 through 24 {
-        $class-prefix: col-pc-;
+        $class-prefix: col-narrowPc-;
         &.#{$class-prefix}#{$num} {
           width: $num / 24 * 100%;
         }
       }
-    $class-prefix: offset-pc-;
+    $class-prefix: offset-narrowPc-;
     @for $num from 1 through 24 {
       &.#{$class-prefix}#{$num} {
         margin-left: $num / 24 * 100%;
@@ -114,12 +124,12 @@ export default {
   }
   @media (min-width: 993px) and (max-width: 1200px){
     @for $num from 1 through 24 {
-        $class-prefix: col-narrowPc-;
+        $class-prefix: col-pc-;
         &.#{$class-prefix}#{$num} {
           width: $num / 24 * 100%;
         }
       }
-    $class-prefix: offset-narrowPc-;
+    $class-prefix: offset-pc-;
     @for $num from 1 through 24 {
       &.#{$class-prefix}#{$num} {
         margin-left: $num / 24 * 100%;
@@ -133,7 +143,7 @@ export default {
           width: $num / 24 * 100%;
         }
       }
-    $class-prefix: offset-widePc-;
+    $class-prefix: offset-wide-pc-;
     @for $num from 1 through 24 {
       &.#{$class-prefix}#{$num} {
         margin-left: $num / 24 * 100%;
