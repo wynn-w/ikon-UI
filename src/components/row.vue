@@ -27,8 +27,8 @@ export default {
     rowStyle() {
       const GUTTER = this.gutter
       return {
-        paddingLeft: `${-GUTTER / 2}px`,
-        paddingRight: `${-GUTTER / 2}px`,
+        marginLeft: `${-GUTTER / 2}px`,
+        marginRight: `${-GUTTER / 2}px`,
       };
     },
     rowClass(){
