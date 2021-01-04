@@ -49,9 +49,8 @@ export default {
     createClasses(propObj, devName = ''){
       let array = []
       if(!propObj){return []}
-      console.log('a'+devName);
       propObj.span && array.push(`col-${devName}${propObj.span}`)
-      propObj.span && array.push(`offset-${devName}${propObj.offset}`)
+      propObj.offset && array.push(`offset-${devName}${propObj.offset}`)
       return array
     }
   },
