@@ -31,16 +31,16 @@ describe('Row', () => {
       setTimeout(() => {
         const row = vm.$el.querySelector('.row')
         const cols = vm.$el.querySelectorAll('.col')
-        console.log(row.outerHTML);
-        // expect(getComputedStyle(row).maringLeft).to.equal('-5px')
-        // expect(getComputedStyle(row).maringRight).to.equal('-5px')
+        expect(getComputedStyle(row).marginLeft).to.equal('-5px')
+        expect(getComputedStyle(row).marginRight).to.equal('-5px')
         expect(getComputedStyle(cols[0]).paddingRight).to.equal('5px')
         expect(getComputedStyle(cols[1]).paddingLeft).to.equal('5px')
-        vm.$destroy()
         done()
+        vm.$el.remove()
+        vm.$destroy()
       }, 0);
   })
-  it('可以设置 align.', (done) => {
+  it('可以设置 align.', () => {
     document.body.appendChild(testDiv)
     testDiv.innerHTML = ` 
             <ik-row align="center" >
@@ -50,11 +50,9 @@ describe('Row', () => {
     vm = new Vue({
         el: testDiv
       })
-      setTimeout(() => {
-        const row = vm.$el.querySelector('.row')
-        expect(getComputedStyle(row).justifyContent).to.equal('center')
-        vm.$destroy()
-        done()
-      }, 0);
+      const row = vm.$el.querySelector('.row')
+      expect(getComputedStyle(row).justifyContent).to.equal('center')
+      vm.$el.remove()
+      vm.$destroy()
   })
 })
