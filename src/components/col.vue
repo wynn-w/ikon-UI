@@ -1,5 +1,5 @@
 <template>
-  <div class="col" :class="colClasses" :style="colStyle">
+  <div class="col" :class="colClasses" :style="colStyle ">
     <slot></slot>
   </div>
 </template>
@@ -56,22 +56,27 @@ export default {
   },
   computed: {
     colClasses() {
-      const {span, offset, phone, ipad, pc, narrowPc, widePc} = this
+      const {span, offset, ipad, pc, narrowPc, widePc} = this
       const createClasses = this.createClasses
       return [
         ...createClasses({span, offset}),
         ...createClasses(ipad, 'ipad-'),
-        ...createClasses(ipad, 'narrow-pc-'),
-        ...createClasses(ipad, 'pc-'),
-        ...createClasses(ipad, 'wide-pc-'),
+        ...createClasses(narrowPc, 'narrow-pc-'),
+        ...createClasses(pc, 'pc-'),
+        ...createClasses(widePc, 'wide-pc-'),
       ];
     },
     colStyle() {
       const GUTTER = this.gutter;
-      return {
-        paddingLeft: `${GUTTER / 2}px`,
-        paddingRight: `${GUTTER / 2}px`,
-      };
+      if(GUTTER){  
+        return {
+          paddingLeft: `${GUTTER / 2}px`,
+          paddingRight: `${GUTTER / 2}px`,
+        };
+      }
+      else{
+        return ;
+      }
     },
   },
 };
