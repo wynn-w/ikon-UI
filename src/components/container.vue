@@ -1,15 +1,17 @@
 <template>
-  <div class="content">
-      <slot></slot>
+  <div class="container">
+    <slot></slot>
   </div>
 </template>
 
 <script>
 export default {
-    name: 'IkonContainer'
-}
+  name: "IkContainer",
+};
 </script>
 
-<style>
-
+<style lang="scss">
+.container {
+  flex-grow: 1;
+}
 </style>
