@@ -44,9 +44,16 @@ export default {
       },
     },
   },
+  data() {
+    return {
+      timer: "",
+    };
+  },
   methods: {
     close() {
       this.$el.remove();
+      this.$emit("beforeClose");
+      clearTimeout(this.timer);
       this.$destroy();
     },
     onClickBtn() {
@@ -64,11 +71,12 @@ export default {
       }px`;
     },
     execCloseDelay() {
-      this.autoClose &&
-        setTimeout(() => {
+      if (this.autoClose) {
+        this.timer = setTimeout(() => {
           this.close();
           this.autoClose = false;
         }, this.autoCloseDelay * 1000);
+      }
     },
   },
   computed: {
@@ -116,16 +124,17 @@ $toast-color: #ffffff;
   .close {
     padding-left: 1em;
     flex-shrink: 0;
+    cursor: default;
   }
-  &.position-top{
-    top: 0; 
+  &.position-top {
+    top: 0;
   }
-  &.position-middle{
+  &.position-middle {
     top: 50%;
-    transform: translate(-50%, -50%); 
+    transform: translate(-50%, -50%);
   }
-  &.position-bottom{
-    bottom: 0; 
+  &.position-bottom {
+    bottom: 0;
   }
 }
 </style>
