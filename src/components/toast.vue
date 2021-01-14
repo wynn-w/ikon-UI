@@ -18,12 +18,8 @@ export default {
   name: "IkToast",
   props: {
     autoClose: {
-      type: Boolean,
-      default: true,
-    },
-    autoCloseDelay: {
-      type: Number,
-      default: 2, // seconde
+      type: [Boolean, Number],
+      default: 2000,
     },
     closeButton: {
       type: Object,
@@ -49,6 +45,7 @@ export default {
   data() {
     return {
       timer: "",
+      _delayTime: 2000,
     };
   },
   methods: {
@@ -74,10 +71,11 @@ export default {
     },
     execCloseDelay() {
       if (this.autoClose) {
+        typeof this.autoClose === "boolean" && (this.autoClose = 2000)
         this.timer = setTimeout(() => {
           this.close();
           this.autoClose = false;
-        }, this.autoCloseDelay);
+        }, this.autoClose);
       }
     },
   },
@@ -99,39 +97,39 @@ export default {
 <style lang="scss">
 $font-size: 14px;
 $toast-min-height: 2em;
-$toast-bg-color: rgba(0, 0, 0, .75);
+$toast-bg-color: rgba(0, 0, 0, 0.75);
 $toast-color: #ffffff;
 @keyframes fade-in {
   0% {
     opacity: 0;
-    filter:alpha(opacity=0);
+    filter: alpha(opacity=0);
   }
   100% {
     opacity: 1;
-    filter:alpha(opacity=100);
+    filter: alpha(opacity=100);
   }
 }
 @keyframes fade-up {
   0% {
     opacity: 0;
-    filter:alpha(opacity=0);
+    filter: alpha(opacity=0);
     transform: translateY(100%);
   }
   100% {
     opacity: 1;
-    filter:alpha(opacity=100);
+    filter: alpha(opacity=100);
     transform: translateY(0%);
   }
 }
 @keyframes fade-down {
   0% {
     opacity: 0;
-    filter:alpha(opacity=0);
+    filter: alpha(opacity=0);
     transform: translateY(-100%);
   }
   100% {
     opacity: 1;
-    filter:alpha(opacity=100);
+    filter: alpha(opacity=100);
     transform: translateY(0%);
   }
 }
@@ -170,17 +168,17 @@ $toast-color: #ffffff;
   line-height: 1.8em;
   background-color: $toast-bg-color;
   color: $toast-color;
-  box-shadow: 0 0 .3em 0 rgba(0, 0, 0, .5);
+  box-shadow: 0 0 0.3em 0 rgba(0, 0, 0, 0.5);
   padding: 0 1em;
-  border-radius: .3em;
+  border-radius: 0.3em;
   display: flex;
   align-items: center;
   .toast__message {
-    padding: .8em 0;
+    padding: 0.8em 0;
   }
   .division-line {
     height: 100%;
-    border-left: .1em solid #666;
+    border-left: 0.1em solid #666;
     margin-left: 1em;
   }
   .close {
