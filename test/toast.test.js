@@ -18,7 +18,7 @@ describe('Toast', () => {
     it('可以设置 autoClose.', (done) => {
       vm = new Constructor({
         propsData: {
-          autoClose: 1,
+          autoClose: 1000,
         }
       }).$mount(testDiv)
       vm.$on('beforeClose', () => {
@@ -30,14 +30,37 @@ describe('Toast', () => {
       const callback = sinon.fake()
       vm = new Constructor({
         propsData: {
-          text: "关关",
-          callback
+          closeButton:{
+            text: "关关",
+            callback
+          }
         }
       }).$mount()
       let closeButton = vm.$el.querySelector('.close')
       expect(closeButton.textContent.trim()).to.be.eq("关关")
       closeButton.click()
       expect(callback).to.have.called
+    })
+    it('可以设置 enableHTML.', () => {
+      const msg = `<p id="pWords">words</p>`
+      vm = new Constructor({
+        propsData:{
+          enableHTML: true
+        }
+      })
+      vm.$slots.default = [msg]
+      vm.$mount(testDiv)
+      const p = vm.$el.querySelector("p#pWords")
+      expect(p).to.exist
+    })
+    it('可以设置 position.', () => {
+      vm = new Constructor({
+        propsData: {
+          position: 'top',
+        }
+      }).$mount(testDiv)
+      expect( vm.$el.classList.contains('position-top')).to.eq(true);
+      // expect
     })
   })
 })
