@@ -1,12 +1,12 @@
 <template>
-  <div class="tabs-header">
+  <div class="tabs-head">
       <slot></slot>
   </div>
 </template>
 
 <script>
 export default {
-    name: 'IkTabsHeader'
+    name: 'IkTabsHead'
 }
 </script>
 

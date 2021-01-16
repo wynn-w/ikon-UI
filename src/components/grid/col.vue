@@ -6,7 +6,6 @@
 
 <script>
 let validator = (value) => {
-  // span, offset is exist or not
   let flag = true;
   const key = Object.keys(value);
   for (const keyValue of key) {

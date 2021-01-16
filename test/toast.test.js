@@ -60,7 +60,6 @@ describe('Toast', () => {
         }
       }).$mount(testDiv)
       expect( vm.$el.classList.contains('position-top')).to.eq(true);
-      // expect
     })
   })
 })

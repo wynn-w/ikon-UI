@@ -1,13 +1,6 @@
-/*
- * @Author: wynn-w
- * @Description: 
- * @Date: 2020-12-09 14:50:05
- * @LastEditTime: 2020-12-27 11:58:04
- * @LastEditors: wynn-w
- */
 const expect = chai.expect;
 import Vue from 'vue'
-import Button from '../src/components/button.vue'
+import Button from '../src/components/form/button/button.vue'
 
 Vue.config.productionTip = false
 Vue.config.devtools = false

@@ -1,7 +1,7 @@
 const expect = chai.expect;
 import Vue from 'vue'
-import Row from '../src/components/row.vue'
-import Col from '../src/components/col.vue'
+import Row from '../src/components/grid/row.vue'
+import Col from '../src/components/grid/col.vue'
 Vue.component("ik-row", Row)
 Vue.component("ik-col", Col)
 Vue.config.productionTip = false

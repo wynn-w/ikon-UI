@@ -1,6 +1,6 @@
 const expect = chai.expect;
 import Vue from 'vue'
-import Col from '../src/components/col.vue'
+import Col from '../src/components/grid/col.vue'
 Vue.config.productionTip = false
 Vue.config.devtools = false
 describe('Row', () => {
@@ -80,7 +80,6 @@ describe('Row', () => {
         }
       }).$mount(testDiv)
       const rowEle = vm.$el
-      console.log(rowEle.outerHTML);
       expect(rowEle.classList.contains('col-wide-pc-24')).to.be.true
       expect(rowEle.classList.contains('offset-wide-pc-1')).to.be.true
     })
