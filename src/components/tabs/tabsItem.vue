@@ -1,29 +1,28 @@
 <template>
-  <div class="tabs-item" :class="classes" @click="emitPorpsName" >
+  <div class="tabs-item" :class="classes" @click="onClick" >
     <slot></slot>
   </div>
 </template>
 
 <script>
-export default {
+export default {       
+
   name: "IkTabsItem",
   props: {
     disable: {
       type: Boolean,
-      dafault: false,
+      default: false,
     },
     name: {
       type: [String,Number],
       required: true,
     },
+    disable:{
+      type: Boolean,
+      default: false
+    }
   },
   inject: ["eventBus"],
-  created() {
-    this.eventBus.$on("updata:selected", (name) => {
-      console.log("item");
-      console.log(name);
-    });
-  },
   data() {
     return {
       active: false,
@@ -31,17 +30,19 @@ export default {
   },
   computed: {
     classes() {
-      return [{ 'active': this.active }];
+      return [{ 'active': this.active }, {'disable':this.disable}];
     },
   },
   created(){
-    this.eventBus.$on("updata:selected",(name)=>{
-      return this.active = name === this.name
+    this.eventBus.$on("updata:selected",(arg)=>{
+      return this.active = arg[0] === this.name
     })
   },
   methods: {
-    emitPorpsName() {
-      return this.eventBus.$emit("updata:selected", this.name);
+    onClick() {
+      if(this.disable){ return }
+      const {left,width} = this.$el.getBoundingClientRect()
+      return this.eventBus.$emit("updata:selected", [this.name,width,left]);
     }
   },
 };
@@ -49,11 +50,19 @@ export default {
 
 <style lang="scss">
 $active-color: #66b1ff;
+$disable-color: #999; // no 996!
 .tabs-item {
+  display: flex;
   flex-shrink: 0;
   padding: 0 1em;
+  align-items: center;
+  cursor: pointer;
   &.active {
-    color: $active-color;
+    color: $active-color; 
+  }
+  &.disable{
+    color: $disable-color;
+    cursor: not-allowed;
   }
 }
 </style>
