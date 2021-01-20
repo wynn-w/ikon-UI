@@ -1,5 +1,5 @@
 <template>
-  <div class="tabs">
+  <div class="tabs" :class="Classes">
     <slot></slot>
   </div>
 </template>
@@ -22,7 +22,7 @@ export default {
     },
   },
   provide() {
-    return { eventBus: this.eventBus };
+    return { eventBus: this.eventBus,direction: this.direction };
   },
   data() {
     return {
@@ -35,14 +35,27 @@ export default {
       if (vm.$options.name) {
         for (const item of vm.$children) {
           if (item.$options.name === 'IkTabsItem' && item.name === this.selected) {
-            const {left,width} = item.$el.getBoundingClientRect()
-            return this.eventBus.$emit("updata:selected", [this.selected,width,left]);
+            const {left,width,top,height} = item.$el.getBoundingClientRect()
+            return this.eventBus.$emit("updata:selected", [this.selected,width,left,height,top]);
           }
         }
       }
     }
   },
+  computed:{
+    Classes(){
+      if(this.direction === 'vertical')
+      return `tabs-direction--${this.direction}`
+    }
+  }
 };
 </script>
 
-<style></style>
+<style lang='scss'>
+.tabs{
+  &.tabs-direction--vertical{
+    display: flex;
+    flex-direction: row;
+  }
+}
+</style>
