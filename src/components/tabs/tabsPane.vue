@@ -1,5 +1,5 @@
 <template>
-  <div class="tabs-pane" :class="classes" v-if="active">
+  <div class="tabs-pane" :class="classes" v-if="active" :data-paneName="name">
     <slot></slot>
   </div>
 </template>
@@ -25,14 +25,10 @@ export default {
     },
   },
   created(){
-    this.eventBus.$on("updata:selected",(name)=>{
-      return this.active = name === this.name
+    this.eventBus && 
+    this.eventBus.$on("updata:selected",(arg)=>{
+      return this.active = arg[0] === this.name
     })
-  },
-  methods: {
-    emitPorpsName() {
-      return this.eventBus.$emit("updata:selected", this.name);
-    },
   },
 };
 </script>

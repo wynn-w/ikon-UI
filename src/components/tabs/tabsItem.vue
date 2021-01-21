@@ -1,12 +1,16 @@
 <template>
-  <div class="tabs-item" :class="classes" @click="onClick" >
+  <div
+    class="tabs-item"
+    :class="classes"
+    @click="onClick"
+    :data-itemName="name"
+  >
     <slot></slot>
   </div>
 </template>
 
 <script>
-export default {       
-
+export default {
   name: "IkTabsItem",
   props: {
     disable: {
@@ -14,13 +18,9 @@ export default {
       default: false,
     },
     name: {
-      type: [String,Number],
+      type: [String, Number],
       required: true,
     },
-    disable:{
-      type: Boolean,
-      default: false
-    }
   },
   inject: ["eventBus"],
   data() {
@@ -30,19 +30,33 @@ export default {
   },
   computed: {
     classes() {
-      return [{ 'active': this.active }, {'disable':this.disable}];
+      return [{ active: this.active }, { disable: this.disable }];
     },
   },
-  created(){
-    this.eventBus.$on("updata:selected",(arg)=>{
-      return this.active = arg[0] === this.name
-    })
+  created() {
+    this.eventBus &&
+    this.eventBus.$on("updata:selected", (arg) => {
+      return (this.active = arg[0] === this.name);
+    });
   },
   methods: {
     onClick() {
-      if(this.disable){ return }
-      const {left,width} = this.$el.getBoundingClientRect()
-      return this.eventBus.$emit("updata:selected", [this.name,width,left]);
+      if (this.disable) {
+        return;
+      }
+      if (this.eventBus) {
+        const { left, width, height, top } = this.$el.getBoundingClientRect();
+        return this.eventBus.$emit("updata:selected", [
+          this.name,
+          width,
+          left,
+          height,
+          top,
+        ]);
+      }
+    },
+    onClickTest(){
+      return this.$emit('click',this)
     }
   },
 };
@@ -58,9 +72,9 @@ $disable-color: #999; // no 996!
   align-items: center;
   cursor: pointer;
   &.active {
-    color: $active-color; 
+    color: $active-color;
   }
-  &.disable{
+  &.disable {
     color: $disable-color;
     cursor: not-allowed;
   }
