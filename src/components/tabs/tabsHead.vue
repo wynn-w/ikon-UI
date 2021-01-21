@@ -13,19 +13,30 @@
 export default {
   name: "IkTabsHead",
   inject: ["eventBus", "direction"],
+  created() {
+    const parentComponentName = this.$parent.$options.name;
+    if (parentComponentName !== "IkTabs") {
+      console &&
+        console.warn &&
+        console.warn(
+          `ikTabsBody 的父组件必须为 ikTabs，但是当前 ikTabsBody 的父组件为 ${parentComponentName}`
+        );
+    }
+  },
   mounted() {
-    this.eventBus.$on("updata:selected", (arg) => {
-      const { left, top } = this.$el.getBoundingClientRect();
-      if (this.direction === "vertical") {
-        this.$refs.tabsHeadLine.style.height = `${arg[3]}px`;
-        this.$refs.tabsHeadLine.style.transform = `translateY(${arg[4] -
-          top}px)`;
-      } else {
-        this.$refs.tabsHeadLine.style.width = `${arg[1]}px`;
-        this.$refs.tabsHeadLine.style.transform = `translateX(${arg[2] -
-          left}px)`;
-      }
-    });
+    this.eventBus &&
+      this.eventBus.$on("updata:selected", (arg) => {
+        const { left, top } = this.$el.getBoundingClientRect();
+        if (this.direction === "vertical") {
+          this.$refs.tabsHeadLine.style.height = `${arg[3]}px`;
+          this.$refs.tabsHeadLine.style.transform = `translateY(${arg[4] -
+            top}px)`;
+        } else {
+          this.$refs.tabsHeadLine.style.width = `${arg[1]}px`;
+          this.$refs.tabsHeadLine.style.transform = `translateX(${arg[2] -
+            left}px)`;
+        }
+      });
   },
   computed: {
     Classes() {
