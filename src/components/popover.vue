@@ -1,9 +1,11 @@
 <template>
-  <div class="ik-popover">
-    <div class="ik-popover__content-wrapper" v-if="visiable">
+  <div class="ik-popover" @click.stop>
+    <div class="ik-popover__content-wrapper" v-if="visiable" >
       <slot name="content"></slot>
     </div>
-    <slot></slot>
+    <div class="ik-popover__controller-wrapper" @click.stop="onClickHandle">
+      <slot></slot>
+    </div>
   </div>
 </template>
 
@@ -12,8 +14,22 @@ export default {
   name: "IkPopover",
   data() {
     return {
-      visiable: true,
+      visiable: false,
     };
+  },
+  methods: {
+    onClickHandle() {
+      this.visiable = !this.visiable;
+      if (this.visiable) {
+        this.$nextTick(() => {
+          document.addEventListener("click", this.removeClickEvent);
+        });
+      }
+    },
+    removeClickEvent() {
+      this.visiable = false;
+      document.removeEventListener("click", this.removeClickEvent);
+    },
   },
 };
 </script>
@@ -29,7 +45,7 @@ export default {
     left: 0;
     border: 1px solid #dcdfe6;
     border-radius: 0.3571rem;
-    box-shadow: 0 0.1429rem 0.8571rem 0 #dcdfe6
+    box-shadow: 0 0.1429rem 0.8571rem 0 #dcdfe6;
   }
 }
 </style>
