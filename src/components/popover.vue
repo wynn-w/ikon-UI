@@ -1,11 +1,19 @@
 <template>
   <div class="ik-popover" @click.stop>
-    <div class="ik-popover__content-wrapper" v-if="visiable" >
+    <div
+      class="ik-popover__content-wrapper"
+      ref="contentWrapper"
+      v-if="visiable"
+    >
       <slot name="content"></slot>
     </div>
-    <div class="ik-popover__controller-wrapper" @click.stop="onClickHandle">
+    <span
+      class="ik-popover__trigger-wrapper"
+      ref="triggerWrapper"
+      @click.stop="onClickHandle"
+    >
       <slot></slot>
-    </div>
+    </span>
   </div>
 </template>
 
@@ -22,6 +30,14 @@ export default {
       this.visiable = !this.visiable;
       if (this.visiable) {
         this.$nextTick(() => {
+          document.body.appendChild(this.$refs.contentWrapper);
+          const {
+            width,
+            height,
+            top,
+            left,
+          } = this.$refs.triggerWrapper.getBoundingClientRect()
+          this.$refs.contentWrapper.style.transform =`translate(${left+window.scrollX}px,${top+window.scrollY}px)`
           document.addEventListener("click", this.removeClickEvent);
         });
       }
@@ -38,8 +54,9 @@ export default {
 .ik-popover {
   display: inline-block;
   vertical-align: top;
-  position: relative;
-  > .ik-popover__content-wrapper {
+  position: relative; 
+}
+.ik-popover__content-wrapper {
     position: absolute;
     bottom: 100%;
     left: 0;
@@ -47,5 +64,4 @@ export default {
     border-radius: 0.3571rem;
     box-shadow: 0 0.1429rem 0.8571rem 0 #dcdfe6;
   }
-}
 </style>
