@@ -1,5 +1,5 @@
 <template>
-  <div class="ik-popover" @click.stop>
+  <div class="ik-popover">
     <div
       class="ik-popover__content-wrapper"
       ref="contentWrapper"
@@ -10,7 +10,7 @@
     <span
       class="ik-popover__trigger-wrapper"
       ref="triggerWrapper"
-      @click.stop="onClickHandle"
+      @click="onClickHandle"
     >
       <slot></slot>
     </span>
@@ -27,6 +27,10 @@ export default {
   },
   methods: {
     onClickHandle() {
+      const eventHandle = function() {
+        this.visiable = false;
+        document.removeEventListener("click", eventHandle);
+      };
       this.visiable = !this.visiable;
       if (this.visiable) {
         this.$nextTick(() => {
@@ -36,15 +40,13 @@ export default {
             height,
             top,
             left,
-          } = this.$refs.triggerWrapper.getBoundingClientRect()
-          this.$refs.contentWrapper.style.transform =`translate(${left+window.scrollX}px,${top+window.scrollY}px)`
-          document.addEventListener("click", this.removeClickEvent);
+          } = this.$refs.triggerWrapper.getBoundingClientRect();
+          this.$refs.contentWrapper.style.transform = `translate(${left +
+            window.scrollX}px,${top + window.scrollY}px)`;
+
+          document.addEventListener("click", eventHandle);
         });
       }
-    },
-    removeClickEvent() {
-      this.visiable = false;
-      document.removeEventListener("click", this.removeClickEvent);
     },
   },
 };
@@ -54,14 +56,13 @@ export default {
 .ik-popover {
   display: inline-block;
   vertical-align: top;
-  position: relative; 
+  position: relative;
 }
 .ik-popover__content-wrapper {
-    position: absolute;
-    bottom: 100%;
-    left: 0;
-    border: 1px solid #dcdfe6;
-    border-radius: 0.3571rem;
-    box-shadow: 0 0.1429rem 0.8571rem 0 #dcdfe6;
-  }
+  position: absolute;
+  bottom: 100%;
+  border: 1px solid #dcdfe6;
+  border-radius: 0.3571rem;
+  box-shadow: 0 0.1429rem 0.8571rem 0 #dcdfe6;
+}
 </style>
