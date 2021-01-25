@@ -1,5 +1,5 @@
 <template>
-  <div class="ik-popover">
+  <div class="ik-popover" @click="onClickPopover" ref="popover">
     <div
       class="ik-popover__content-wrapper"
       ref="contentWrapper"
@@ -7,11 +7,7 @@
     >
       <slot name="content"></slot>
     </div>
-    <span
-      class="ik-popover__trigger-wrapper"
-      ref="triggerWrapper"
-      @click="onClickHandle"
-    >
+    <span class="ik-popover__trigger-wrapper" ref="triggerWrapper">
       <slot></slot>
     </span>
   </div>
@@ -26,31 +22,41 @@ export default {
     };
   },
   methods: {
-    onClickHandle(e) {
+    onClickPopover(e) {
       this.visiable = !this.visiable;
       if (this.$refs.triggerWrapper.contains(e.target)) {
         if (this.visiable) {
-          setTimeout(() => {
-            document.body.appendChild(this.$refs.contentWrapper);
-            const {
-              width,
-              height,
-              top,
-              left,
-            } = this.$refs.triggerWrapper.getBoundingClientRect();
-            this.$refs.contentWrapper.style.transform = `translate(${left +
-              window.scrollX}px,${top + window.scrollY}px)`;
-
-            document.addEventListener("click", this.eventHandler);
-          });
+          this.onVisiable();
         }
       }
     },
-    eventHandler(e) {
-      if (!this.$refs.contentWrapper.contains(e.target)) {
-        this.visiable = false;
-        document.removeEventListener("click", this.eventHandler);
-      }
+    setContentPosition() {
+      document.body.appendChild(this.$refs.contentWrapper);
+      const {
+        width,
+        height,
+        top,
+        left,
+      } = this.$refs.triggerWrapper.getBoundingClientRect();
+      this.$refs.contentWrapper.style.transform = `translate(${left +
+        window.scrollX}px,${top + window.scrollY}px)`;
+    },
+    toListenDocument() {
+      const eventHandler = (e) => {
+        if (this.$refs.contentWrapper && !this.$refs.contentWrapper.contains(e.target)) {
+          this.visiable = false;
+          document.removeEventListener("click", eventHandler);
+          clearTimeout(popoverTimer)
+        }
+      };
+      document.addEventListener("click", eventHandler);
+    },
+    onVisiable() {
+       const popoverTimer = setTimeout(() => {
+        this.setContentPosition();
+        this.toListenDocument();
+      });
+      return popoverTimer
     },
   },
 };
