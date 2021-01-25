@@ -26,26 +26,30 @@ export default {
     };
   },
   methods: {
-    onClickHandle() {
-      const eventHandle = function() {
-        this.visiable = false;
-        document.removeEventListener("click", eventHandle);
-      };
+    onClickHandle(e) {
       this.visiable = !this.visiable;
-      if (this.visiable) {
-        this.$nextTick(() => {
-          document.body.appendChild(this.$refs.contentWrapper);
-          const {
-            width,
-            height,
-            top,
-            left,
-          } = this.$refs.triggerWrapper.getBoundingClientRect();
-          this.$refs.contentWrapper.style.transform = `translate(${left +
-            window.scrollX}px,${top + window.scrollY}px)`;
+      if (this.$refs.triggerWrapper.contains(e.target)) {
+        if (this.visiable) {
+          setTimeout(() => {
+            document.body.appendChild(this.$refs.contentWrapper);
+            const {
+              width,
+              height,
+              top,
+              left,
+            } = this.$refs.triggerWrapper.getBoundingClientRect();
+            this.$refs.contentWrapper.style.transform = `translate(${left +
+              window.scrollX}px,${top + window.scrollY}px)`;
 
-          document.addEventListener("click", eventHandle);
-        });
+            document.addEventListener("click", this.eventHandler);
+          });
+        }
+      }
+    },
+    eventHandler(e) {
+      if (!this.$refs.contentWrapper.contains(e.target)) {
+        this.visiable = false;
+        document.removeEventListener("click", this.eventHandler);
       }
     },
   },
@@ -61,6 +65,7 @@ export default {
 .ik-popover__content-wrapper {
   position: absolute;
   bottom: 100%;
+  left: 0;
   border: 1px solid #dcdfe6;
   border-radius: 0.3571rem;
   box-shadow: 0 0.1429rem 0.8571rem 0 #dcdfe6;
