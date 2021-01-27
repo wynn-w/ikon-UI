@@ -74,7 +74,8 @@ export default {
   margin-top: -0.8rem;
   border: 1px solid #dcdfe6;
   border-radius: 0.3571rem;
-  box-shadow: 0 0.1429rem 0.8571rem 0 #dcdfe6;
+  background-color: #ffffff;
+  filter: drop-shadow(0 0.1429rem 0.8571rem 0 #dcdfe6); 
   transform: translateY(-100%);
   &::before,
   &::after {
@@ -88,7 +89,9 @@ export default {
     border: 0.5rem dashed transparent;
     //
     position: absolute;
-    left: 10%;
+    left: 0.7143rem;
+    max-width: 20em;
+    word-break: break-all;
   }
   &::before {
     border-top: 0.5rem solid #dcdfe6;
