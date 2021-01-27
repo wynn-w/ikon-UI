@@ -64,13 +64,39 @@ export default {
 .ik-popover {
   display: inline-block;
   vertical-align: top;
+  position: relative;
 }
 .ik-popover__content-wrapper {
+  display: inline-block;
   position: absolute;
   left: 0;
+  padding: 0.5rem 1rem;
+  margin-top: -0.8rem;
   border: 1px solid #dcdfe6;
   border-radius: 0.3571rem;
   box-shadow: 0 0.1429rem 0.8571rem 0 #dcdfe6;
   transform: translateY(-100%);
+  &::before,
+  &::after {
+    content: "";
+    display: block;
+    height: 0;
+    width: 0;
+    //兼容性
+    font-size: 0;
+    line-height: 0;
+    border: 0.5rem dashed transparent;
+    //
+    position: absolute;
+    left: 10%;
+  }
+  &::before {
+    border-top: 0.5rem solid #dcdfe6;
+    top: 100%;
+  }
+  &::after {
+    border-top: 0.5rem solid #ffffff;;
+    top: calc(100% - 0.0929rem);
+  }
 }
 </style>
