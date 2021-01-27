@@ -3,7 +3,7 @@
     <div
       class="ik-popover__content-wrapper"
       ref="contentWrapper"
-      v-if="visiable"
+      v-if="visible"
     >
       <slot name="content"></slot>
     </div>
@@ -18,45 +18,43 @@ export default {
   name: "IkPopover",
   data() {
     return {
-      visiable: false,
+      visible: false,
     };
   },
   methods: {
     onClickPopover(e) {
-      this.visiable = !this.visiable;
       if (this.$refs.triggerWrapper.contains(e.target)) {
-        if (this.visiable) {
-          this.onVisiable();
-        }
+        this.visible ? this.close() : this.open();
       }
+    },
+    open() {
+      this.visible = true;
+      this.$nextTick(() => {
+        this.setContentPosition();
+        document.addEventListener("click", this.eventHandler);
+      });
+    },
+    close() {
+      this.visible = false;
+      document.removeEventListener("click", this.eventHandler);
     },
     setContentPosition() {
       document.body.appendChild(this.$refs.contentWrapper);
-      const {
-        width,
-        height,
-        top,
-        left,
-      } = this.$refs.triggerWrapper.getBoundingClientRect();
-      this.$refs.contentWrapper.style.transform = `translate(${left +
-        window.scrollX}px,${top + window.scrollY}px)`;
+      const { top, left } = this.$refs.triggerWrapper.getBoundingClientRect();
+      this.$refs.contentWrapper.style.left = left + window.scrollX + "px";
+      this.$refs.contentWrapper.style.top = top + window.scrollY + "px";
     },
-    toListenDocument() {
-      const eventHandler = (e) => {
-        if (this.$refs.contentWrapper && !this.$refs.contentWrapper.contains(e.target)) {
-          this.visiable = false;
-          document.removeEventListener("click", eventHandler);
-          clearTimeout(popoverTimer)
-        }
-      };
-      document.addEventListener("click", eventHandler);
-    },
-    onVisiable() {
-       const popoverTimer = setTimeout(() => {
-        this.setContentPosition();
-        this.toListenDocument();
-      });
-      return popoverTimer
+    eventHandler(e) {
+      if (this.$refs.popover && this.$refs.popover.contains(e.target)) {
+        return;
+      }
+      if (
+        this.$refs.contentWrapper &&
+        this.$refs.contentWrapper.contains(e.target)
+      ) {
+        return;
+      }
+      this.close();
     },
   },
 };
@@ -66,14 +64,13 @@ export default {
 .ik-popover {
   display: inline-block;
   vertical-align: top;
-  position: relative;
 }
 .ik-popover__content-wrapper {
   position: absolute;
-  bottom: 100%;
   left: 0;
   border: 1px solid #dcdfe6;
   border-radius: 0.3571rem;
   box-shadow: 0 0.1429rem 0.8571rem 0 #dcdfe6;
+  transform: translateY(-100%);
 }
 </style>
