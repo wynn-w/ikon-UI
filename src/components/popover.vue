@@ -6,7 +6,7 @@
       ref="contentWrapper"
       v-if="visible"
     >
-      <slot name="content"></slot>
+      <slot name="content"></slot>{{ width }}
     </div>
     <span class="ik-popover__trigger-wrapper" ref="triggerWrapper">
       <slot></slot>
@@ -23,6 +23,13 @@ export default {
       default: "top",
       validator(value) {
         return ["top", "right", "bottom", "left"].indexOf(value) > -1;
+      },
+    },
+    width: {
+      type: [Number, String],
+      validator(value) {
+        const rule = /^[0-9]+.?[0-9]*/;
+        return rule.test(value - 0);
       },
     },
   },
@@ -56,6 +63,7 @@ export default {
         top,
         left,
       } = this.$refs.triggerWrapper.getBoundingClientRect();
+      this.setContentWidth();
       if (this.position === "top") {
         this.$refs.contentWrapper.style.left = left + window.scrollX + "px";
         this.$refs.contentWrapper.style.top = top + window.scrollY + "px";
@@ -78,6 +86,18 @@ export default {
           left + width + window.scrollX + "px";
         this.$refs.contentWrapper.style.top =
           top + (height - contentHeight) / 2 + window.scrollY + "px";
+      }
+    },
+    setContentWidth() {
+      if (this.width) {
+        const _width = this.width;
+        if (_width < 150) {
+          this.$refs.contentWrapper.style.width = "150px";
+        } else if (_width > window.innerWidth) {
+          this.$refs.contentWrapper.style.width = `${window.innerWidth}px`;
+        } else {
+          this.$refs.contentWrapper.style.width = `${_width}px`;
+        }
       }
     },
     eventHandler(e) {
@@ -104,13 +124,21 @@ export default {
 }
 .ik-popover__content-wrapper {
   display: inline-block;
+  box-sizing: content-box;
   position: absolute;
-
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.7rem;
   border: 1px solid #dcdfe6;
   border-radius: 0.3571rem;
   background-color: #ffffff;
-  filter: drop-shadow(0 0.1429rem 0.8571rem 0 #dcdfe6);
+  @supports (filter: drop-shadow()) {
+    filter: drop-shadow(0 0.1429rem 0.8571rem 0 #dcdfe6);
+  }
+  @supports not (filter: drop-shadow()) {
+    box-shadow: (0 0.1429rem 0.8571rem 0 #dcdfe6);
+  }
+  // 中文无效
+  word-break: break-all;
+  max-width: 20rem;
   &.position-top,
   &.position-bottom,
   &.position-left,
@@ -127,9 +155,6 @@ export default {
       border: 0.5rem dashed transparent;
       //
       position: absolute;
-      max-width: 20em;
-      // 中文无效
-      word-break: break-all;
     }
   }
   &.position-top {
