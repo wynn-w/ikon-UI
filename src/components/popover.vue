@@ -46,29 +46,15 @@ export default {
     };
   },
   mounted() {
-    if (this.trigger === "click") {
-      this.$refs.popover.addEventListener("click", this.onClickPopover);
-    } else if (this.trigger === "hover") {
-      this.$refs.popover.addEventListener("mouseenter", this.open);
-      this.$refs.popover.addEventListener("mouseleave", this.close);
-    } else if (this.trigger === "focus") {
-      {
-        this.$refs.popover.addEventListener("mousedown", this.open);
-        this.$refs.popover.addEventListener("mouseup", this.close);
-console.log(111);
-      }
+    this.addPopoverListeners();
+  },
+  updated(){
+    if(this.trigger === 'hover' && this.$refs.contentWrapper){
+      this.addContentListeners()
     }
   },
   destroyed() {
-    if (this.trigger === "click") {
-      this.$refs.popover.removeEventListener("click", this.onClickPopover);
-    } else if (this.trigger === "hover") {
-      this.$refs.popover.addEventListener("mouseenter", this.open);
-      this.$refs.popover.addEventListener("mouseleave", this.close);
-    } else {
-      this.$refs.popover.addEventListener("mousedown", this.open);
-      this.$refs.popover.addEventListener("mouseup", this.close);
-    }
+    this.removeAllListeners();
   },
   methods: {
     onClickPopover(e) {
@@ -87,7 +73,6 @@ console.log(111);
       this.visible = false;
       document.removeEventListener("click", this.eventHandler);
     },
-
     setContentPosition() {
       const contentWrapper = this.$refs.contentWrapper;
       document.body.appendChild(contentWrapper);
@@ -149,6 +134,36 @@ console.log(111);
         return;
       }
       this.close();
+    },
+    addPopoverListeners() {
+      if (this.trigger === "click") {
+        this.$refs.popover.addEventListener("click", this.onClickPopover);
+      } else if (this.trigger === "hover") {
+        this.$refs.popover.addEventListener("mouseenter", this.open);
+        this.$refs.popover.addEventListener("mouseleave", this.close);
+      } else if (this.trigger === "focus") {
+        {
+          this.$refs.popover.addEventListener("mousedown", this.open);
+          this.$refs.popover.addEventListener("mouseup", this.close);
+        }
+      }
+    },
+    addContentListeners(){
+        this.$refs.contentWrapper.addEventListener("mouseenter", this.open);
+        this.$refs.contentWrapper.addEventListener("mouseleave", this.close);
+    },
+    removeAllListeners() {
+      if (this.trigger === "click") {
+        this.$refs.popover.removeEventListener("click", this.onClickPopover);
+      } else if (this.trigger === "hover") {
+        this.$refs.popover.removeEventListener("mouseenter", this.open);
+        this.$refs.popover.removeEventListener("mouseleave", this.close);
+        this.$refs.contentWrapper.removeEventListener("mouseenter", this.open);
+        this.$refs.contentWrapper.removeEventListener("mouseleave", this.close);
+      } else {
+        this.$refs.popover.removeEventListener("mousedown", this.open);
+        this.$refs.popover.removeEventListener("mouseup", this.close);
+      }
     },
   },
 };
