@@ -1,5 +1,5 @@
 <template>
-  <div class="ik-popover" @click="onClickPopover" ref="popover">
+  <div class="ik-popover" ref="popover">
     <div
       class="ik-popover__content-wrapper"
       :class="{ [`position-${position}`]: true }"
@@ -32,11 +32,43 @@ export default {
         return rule.test(value - 0);
       },
     },
+    trigger: {
+      type: String,
+      default: "click",
+      validator(value) {
+        return ["click", "hover", "focus"].includes(value) > -1;
+      },
+    },
   },
   data() {
     return {
       visible: false,
     };
+  },
+  mounted() {
+    if (this.trigger === "click") {
+      this.$refs.popover.addEventListener("click", this.onClickPopover);
+    } else if (this.trigger === "hover") {
+      this.$refs.popover.addEventListener("mouseenter", this.open);
+      this.$refs.popover.addEventListener("mouseleave", this.close);
+    } else if (this.trigger === "focus") {
+      {
+        this.$refs.popover.addEventListener("mousedown", this.open);
+        this.$refs.popover.addEventListener("mouseup", this.close);
+console.log(111);
+      }
+    }
+  },
+  destroyed() {
+    if (this.trigger === "click") {
+      this.$refs.popover.removeEventListener("click", this.onClickPopover);
+    } else if (this.trigger === "hover") {
+      this.$refs.popover.addEventListener("mouseenter", this.open);
+      this.$refs.popover.addEventListener("mouseleave", this.close);
+    } else {
+      this.$refs.popover.addEventListener("mousedown", this.open);
+      this.$refs.popover.addEventListener("mouseup", this.close);
+    }
   },
   methods: {
     onClickPopover(e) {
@@ -48,14 +80,14 @@ export default {
       this.visible = true;
       this.$nextTick(() => {
         this.setContentPosition();
-        document.addEventListener("click", this.eventHandler);
+        document.addEventListener("click", this.eventHandler, true);
       });
     },
     close() {
       this.visible = false;
       document.removeEventListener("click", this.eventHandler);
     },
-    
+
     setContentPosition() {
       const contentWrapper = this.$refs.contentWrapper;
       document.body.appendChild(contentWrapper);
