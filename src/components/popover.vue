@@ -6,7 +6,7 @@
       ref="contentWrapper"
       v-if="visible"
     >
-      <slot name="content"></slot>{{ width }}
+      <slot name="content"></slot>
     </div>
     <span class="ik-popover__trigger-wrapper" ref="triggerWrapper">
       <slot></slot>
@@ -55,50 +55,56 @@ export default {
       this.visible = false;
       document.removeEventListener("click", this.eventHandler);
     },
+    
     setContentPosition() {
-      document.body.appendChild(this.$refs.contentWrapper);
+      const contentWrapper = this.$refs.contentWrapper;
+      document.body.appendChild(contentWrapper);
+      this.setContentWidth();
+      this.calcContentStyle();
+    },
+    setContentWidth() {
+      if (this.width) {
+        const _width = this.width;
+        const _min = 150;
+        const _max = window.innerWidth ? window.innerWidth : 1920;
+        let elementWidth = this.$refs.contentWrapper.style.width;
+        if (_width < _min) {
+          elementWidth = `${_min}px`;
+        } else if (_width > _max) {
+          elementWidth = `${_max}px`;
+        } else {
+          elementWidth = `${_width}px`;
+        }
+      }
+    },
+    calcContentStyle() {
+      const { contentWrapper, triggerWrapper } = this.$refs;
       const {
         width,
         height,
         top,
         left,
-      } = this.$refs.triggerWrapper.getBoundingClientRect();
-      this.setContentWidth();
-      if (this.position === "top") {
-        this.$refs.contentWrapper.style.left = left + window.scrollX + "px";
-        this.$refs.contentWrapper.style.top = top + window.scrollY + "px";
-      } else if (this.position === "bottom") {
-        this.$refs.contentWrapper.style.left = left + window.scrollX + "px";
-        this.$refs.contentWrapper.style.top =
-          top + height + window.scrollY + "px";
-      } else if (this.position === "left") {
-        let {
-          height: contentHeight,
-        } = this.$refs.contentWrapper.getBoundingClientRect();
-        this.$refs.contentWrapper.style.left = left + window.scrollX + "px";
-        this.$refs.contentWrapper.style.top =
-          top + (height - contentHeight) / 2 + window.scrollY + "px";
-      } else if (this.position === "right") {
-        let {
-          height: contentHeight,
-        } = this.$refs.contentWrapper.getBoundingClientRect();
-        this.$refs.contentWrapper.style.left =
-          left + width + window.scrollX + "px";
-        this.$refs.contentWrapper.style.top =
-          top + (height - contentHeight) / 2 + window.scrollY + "px";
-      }
-    },
-    setContentWidth() {
-      if (this.width) {
-        const _width = this.width;
-        if (_width < 150) {
-          this.$refs.contentWrapper.style.width = "150px";
-        } else if (_width > window.innerWidth) {
-          this.$refs.contentWrapper.style.width = `${window.innerWidth}px`;
-        } else {
-          this.$refs.contentWrapper.style.width = `${_width}px`;
-        }
-      }
+      } = triggerWrapper.getBoundingClientRect();
+      const { height: contentHeight } = contentWrapper.getBoundingClientRect();
+      const postions = new Map()
+        .set("top", {
+          left: `${left + window.scrollX}px`,
+          top: `${top + window.scrollY}px`,
+        })
+        .set("bottom", {
+          left: `${left + window.scrollX}px`,
+          top: `${top + height + window.scrollY}px`,
+        })
+        .set("left", {
+          left: `${left + window.scrollX}px`,
+          top: `${top + (height - contentHeight) / 2 + window.scrollY}px`,
+        })
+        .set("right", {
+          left: `${left + width + window.scrollX}px`,
+          top: `${top + (height - contentHeight) / 2 + window.scrollY}px`,
+        });
+      contentWrapper.style.left = postions.get(`${this.position}`).left;
+      contentWrapper.style.top = postions.get(`${this.position}`).top;
     },
     eventHandler(e) {
       if (this.$refs.popover && this.$refs.popover.contains(e.target)) {
@@ -127,7 +133,7 @@ export default {
   box-sizing: content-box;
   position: absolute;
   padding: 0.5rem 0.7rem;
-  border: 1px solid #dcdfe6;
+  border: 0.0714rem solid #dcdfe6;
   border-radius: 0.3571rem;
   background-color: #ffffff;
   @supports (filter: drop-shadow()) {
