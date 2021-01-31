@@ -6,7 +6,7 @@
       ref="contentWrapper"
       v-if="visible"
     >
-      <slot name="content"></slot>
+      <slot name="content">{{content}}</slot>
     </div>
     <span class="ik-popover__trigger-wrapper" ref="triggerWrapper">
       <slot></slot>
@@ -39,6 +39,7 @@ export default {
         return ["click", "hover", "focus"].includes(value) > -1;
       },
     },
+    content: String
   },
   data() {
     return {
