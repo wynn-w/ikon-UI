@@ -39,27 +39,28 @@ export default {
   },
   inject: ["eventBus"],
   mounted() {
-    this.eventBus && this.eventBus.$on("update:selected",(name)=>{
-      (name !== this.name) && this.onClose()    
+    this.eventBus.$on("update:selected",(name)=>{
+      // console.log(name);
+      console.log('mounted');
+      (name !== this.name) ? this.onClose() : this.onOpen()    
     })
   },
   methods:{
     onClick(){
       if(this.visibale){
-        this.onClose()
-        
+        this.onClose() 
       }else{
-        this.onOpen()
-        this.eventBus && this.eventBus.$emit('update:selected',this.name)
+        this.eventBus.$emit('update:selected',this.name)
       }  
     },
     onOpen(){
       this.visibale = true
-      this.$refs.icon.style.transform='rotate(0)'
+      this.$refs.icon.style.transform='rotate(90deg)'
+      console.log('open');
     },
     onClose(){
       this.visibale = false
-      this.$refs.icon.style.transform='rotate(90deg)'
+      this.$refs.icon.style.transform='rotate(0)'
     }
   }
 };
@@ -90,10 +91,6 @@ $border-radius: 4px;
   }
   &:last-child {
     margin-bottom: -1px;
-    // > .ik-collapse-item__title:last-child {
-    //   border-bottom-left-radius: $border-radius;
-    //   border-bottom-right-radius: $border-radius;
-    // }
   }
   
 }

@@ -13,16 +13,18 @@ export default {
       type: Boolean,
       default: false,
     },
+    selected:String
   },
   provide() {
-    if (this.single) {
       return { eventBus: this.eventBus };
-    }
   },
   data() {
     return {
       eventBus: new Vue(),
     };
+  },
+  mounted(){
+    this.eventBus.$emit("update:selected",this.selected)
   },
   methods: {},
 };
