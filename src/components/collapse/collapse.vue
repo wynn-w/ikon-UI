@@ -13,23 +13,44 @@ export default {
       type: Boolean,
       default: false,
     },
-    selected:String
+    selected: Array,
   },
   provide() {
-      return { eventBus: this.eventBus };
+    return { eventBus: this.eventBus };
   },
   data() {
     return {
       eventBus: new Vue(),
     };
   },
-  mounted(){
-    this.eventBus.$emit("update:selected",this.selected)
-    this.eventBus.$on("update:selected",(name)=>{
-      this.$emit("update:selected",name)
-    })
+  mounted() {
+    this.selected && this.eventBus.$emit("update:selected", this.selected);
+    let [..._selected] = [...(this.selected || [])];
+    this.addEvent(_selected);
+    this.removeEvent(_selected);
+
   },
-  methods: {},
+  methods: {
+    addEvent(_selected) {
+      this.eventBus.$on("update:addSelected", name => {
+        if (this.single) {
+          _selected = [name];
+        } else {
+          _selected.push(name);
+        }
+        this.eventBus.$emit("update:selected", _selected);
+        this.$emit("update:selected", _selected);
+      });
+    },
+    removeEvent(_selected) {
+      this.eventBus.$on("update:removeSelected", name => {
+        const index = _selected.indexOf(name);
+        _selected.splice(index, 1);
+        this.eventBus.$emit("update:selected", _selected);
+        this.$emit("update:selected", _selected);
+      });
+    },
+  },
 };
 </script>
 

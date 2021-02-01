@@ -39,24 +39,25 @@ export default {
   },
   inject: ["eventBus"],
   mounted() {
-    this.eventBus.$on("update:selected",(name)=>{
-      // console.log(name);
-      console.log('mounted');
-      (name !== this.name) ? this.onClose() : this.onOpen()    
+    this.eventBus.$on("update:selected",(names)=>{
+      if(names.includes(this.name)){
+         this.visibale === false && this.onOpen() 
+        }else{ 
+          this.visibale !== false && this.onClose() 
+        } 
     })
   },
   methods:{
     onClick(){
       if(this.visibale){
-        this.onClose() 
+       this.eventBus.$emit('update:removeSelected',this.name)
       }else{
-        this.eventBus.$emit('update:selected',this.name)
+        this.eventBus.$emit('update:addSelected',this.name)
       }  
     },
     onOpen(){
       this.visibale = true
       this.$refs.icon.style.transform='rotate(90deg)'
-      console.log('open');
     },
     onClose(){
       this.visibale = false
@@ -77,6 +78,7 @@ $border-radius: 4px;
     flex-direction: row;
     min-height: 32px;
     align-items: center;
+    cursor: pointer;
     >.title-content{
         flex:1
     }
