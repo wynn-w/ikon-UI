@@ -5,7 +5,7 @@
     @click="$emit('click')"
   >
     <ik-icon :name="icon" v-if="icon && !loading" class="_icon"></ik-icon>
-    <ik-icon name="loading" v-if="loading" class="_icon loading"></ik-icon>
+    <ik-icon name="i-loading" v-if="loading" class="_icon loading"></ik-icon>
     <div class="content" v-if="!circle">
       <slot></slot>
     </div>
@@ -57,6 +57,14 @@ export default {
 </script>
 
 <style lang="scss">
+$button-height: 32px;
+$font-size: 14px;
+$button-color: #fff;
+$button-bg: #409eff;
+$button-bg-focus: #3a8ee6;
+$border-radius: 0.4rem;
+$border-color: #409eff;
+$border-color-active: #3a8ee6;
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -74,21 +82,21 @@ export default {
 }
 
 .ik-button {
-  font-size: var(--font-size);
-  height: var(--button-height);
+  font-size: $font-size;
+  height: $button-height;
   padding: 0 1rem;
-  border-radius: var(--border-radius);
-  border: 0.1rem solid var(--border-color);
-  background: var(--button-bg);
-  color: var(--button-color);
-  line-height: var(--font-size);
+  border-radius: $border-radius;
+  border: 0.1rem solid $border-color;
+  background: $button-bg;
+  color: $button-color;
+  line-height: $font-size;
   &:hover {
     opacity: 0.8;
   }
   &:active {
     opacity: 1 !important;
-    background: var(--border-color-active) !important;
-    border: 0.1rem solid var(--border-color-active);
+    background: $border-color-active !important;
+    border: 0.1rem solid $border-color-active;
   }
   &:focus {
     opacity: 0.8;
