@@ -1,10 +1,11 @@
 <template>
-  <svg class="icon" aria-hidden="true">
-    <use :xlink:href="`#i-${name}`"></use>
+  <svg class="ik-icon" aria-hidden="true">
+    <use :xlink:href="`#${name}`"></use>
   </svg>
 </template>
 
 <script>
+import '../assets/iconFont/iconfont'
 export default {
   name: "IkIcon",
   props: {
@@ -30,5 +31,5 @@ export default {
 
 <style lang="scss">
 svg path { fill: inherit !important }
-.icon {  width: 1em; height: 1em; fill: currentColor; }
+.ik-icon {  width: 1em; height: 1em; fill: currentColor; }
 </style>
