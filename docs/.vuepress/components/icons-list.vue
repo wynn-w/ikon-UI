@@ -33,9 +33,9 @@ export default {
   data() {
     return {
       names: [
-        ["i-bottom", "i-top", "i-left", "i-right"],
-        ["i-setting", "i-loading", "i-download", "i-delete"],
-        ["i-edit", "i-Shapex", "i-success"],
+        ["ik-bottom", "ik-top", "ik-left", "ik-right"],
+        ["ik-setting", "ik-loading", "ik-download", "ik-delete"],
+        ["ik-edit", "ik-Shapex", "ik-success"],
       ],
     };
   },

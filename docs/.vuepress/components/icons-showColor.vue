@@ -4,17 +4,17 @@
       <div class="icon-show-wrapper">
         <div class="show-icon">
           <div class="icon-wrapper">
-            <ik-icon name="i-setting" color="#66b1ff"></ik-icon>
+            <ik-icon name="ik-setting" color="#66b1ff"></ik-icon>
           </div>
         </div>
         <div class="show-icon">
           <div class="icon-wrapper">
-            <ik-icon name="i-delete" color="#fc5531"></ik-icon>
+            <ik-icon name="ik-delete" color="#fc5531"></ik-icon>
           </div>
         </div>
         <div class="show-icon">
           <div class="icon-wrapper">
-            <ik-icon name="i-edit" color="#3eaf7c"></ik-icon>
+            <ik-icon name="ik-edit" color="#3eaf7c"></ik-icon>
           </div>
         </div>
       </div>
@@ -32,9 +32,9 @@ export default {
   data() {
     return {
       names: [
-        ["i-bottom", "i-top", "i-left", "i-right"],
-        ["i-setting", "i-loading", "i-download", "i-delete"],
-        ["i-edit", "i-Shapex", "i-success"],
+        ["ik-bottom", "ik-top", "ik-left", "ik-right"],
+        ["ik-setting", "ik-loading", "ik-download", "ik-delete"],
+        ["ik-edit", "ik-Shapex", "ik-success"],
       ],
     };
   },

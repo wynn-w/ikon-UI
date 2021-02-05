@@ -5,7 +5,7 @@
     @click="$emit('click')"
   >
     <ik-icon :name="icon" v-if="icon && !loading" class="_icon"></ik-icon>
-    <ik-icon name="i-loading" v-if="loading" class="_icon loading"></ik-icon>
+    <ik-icon name="ik-loading" v-if="loading" class="_icon loading"></ik-icon>
     <div class="content" v-if="!circle">
       <slot></slot>
     </div>
