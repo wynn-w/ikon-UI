@@ -1,5 +1,5 @@
 module.exports = {
-  base: '/ikon',
+  base: '/ikon-UI/',
   title: 'ikon UI',
   description: '一个基于 Vue 2.0的 UI 框架,持续学习更新中...',
   themeConfig: {
