@@ -23,26 +23,16 @@
 </template>
 <script>
 import Icon from "../../../src/components/icon";
-import Button from "../../../src/components/form/button/button";
 export default {
   components: {
-    "ik-icon": Icon,
-    "ik-button": Button,
-  },
-  data() {
-    return {
-      names: [
-        ["ik-bottom", "ik-top", "ik-left", "ik-right"],
-        ["ik-setting", "ik-loading", "ik-download", "ik-delete"],
-        ["ik-edit", "ik-Shapex", "ik-success"],
-      ],
-    };
-  },
+    "ik-icon": Icon
+  }
 };
 </script>
 
 <style lang="scss">
 .icon-show-wrapper {
+  min-height: 46px;
   font-size: 14px;
   display: flex;
   flex-direction: row;

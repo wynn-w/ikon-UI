@@ -6,37 +6,68 @@ title: "icon"
 
 提供了一套常用的图标集合。
 
-### 使用方法
-
-通过设置属性 name 为 ik-iconName 来使用即可。例如：
+### 基本用法
 <ClientOnly>
 <icons-show />
 </ClientOnly>
 
-```html
+::: details 点击查看源码
+```vue
 <div>
   <ik-icon name="setting"></ik-icon>
   <ik-icon name="delete"></ik-icon>
   <ik-button :loading="true"> 加载中</ik-button>
 </div>
-```
 
-通过设置属性 color 为 16 进数值 来自定义图标颜色。例如：
+<script>
+import Icon from "../../../src/components/icon";
+import Button from "../../../src/components/form/button/button";
+export default {
+  components: {
+    "ik-icon": Icon,
+    "ik-button": Button,
+  },
+  data() {
+    return {
+      names: [
+        ["ik-bottom", "ik-top", "ik-left", "ik-right"],
+        ["ik-setting", "ik-loading", "ik-download", "ik-delete"],
+        ["ik-edit", "ik-Shapex", "ik-success"],
+      ],
+    };
+  },
+};
+</script>
+```
+:::
+
+### 自定义图标颜色
 <ClientOnly>
 <icons-showColor />
 </ClientOnly>
 
-```html
+::: details 点击查看源码
+```vue
 <div>
   <ik-icon name="i-setting" color="#66b1ff"></ik-icon>
   <ik-icon name="i-delete" color="#fc5531"></ik-icon>
-  <ik-button :loading="true" color="#3eaf7c"> 加载中</ik-button>
+  <ik-icon name="ik-edit" color="#3eaf7c"></ik-icon>
 </div>
+
+<script>
+import Icon from "../../../src/components/icon";
+export default {
+  components: {
+    "ik-icon": Icon
+  }
+};
+</script>
 ```
+:::
 
 ### 图标集合
-
-所有图标展示
+       
+       
 <ClientOnly>
 <icons-list />
 </ClientOnly>

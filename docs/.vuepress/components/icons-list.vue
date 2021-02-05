@@ -35,7 +35,7 @@ export default {
       names: [
         ["ik-bottom", "ik-top", "ik-left", "ik-right"],
         ["ik-setting", "ik-loading", "ik-download", "ik-delete"],
-        ["ik-edit", "ik-Shapex", "ik-success"],
+        ["ik-edit", "ik-search", "ik-success1","ik-ErrorCircle-1"],
       ],
     };
   },
