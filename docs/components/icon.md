@@ -7,6 +7,8 @@ title: "icon"
 提供了一套常用的图标集合。
 
 ### 基本用法
+<br />
+
 <ClientOnly>
 <icons-show />
 </ClientOnly>
@@ -20,13 +22,6 @@ title: "icon"
 </div>
 
 <script>
-import Icon from "../../../src/components/icon";
-import Button from "../../../src/components/form/button/button";
-export default {
-  components: {
-    "ik-icon": Icon,
-    "ik-button": Button,
-  },
   data() {
     return {
       names: [
@@ -39,14 +34,19 @@ export default {
 };
 </script>
 ```
+
 :::
 
 ### 自定义图标颜色
+
+<br />
+
 <ClientOnly>
 <icons-showColor />
 </ClientOnly>
 
 ::: details 点击查看源码
+
 ```vue
 <div>
   <ik-icon name="i-setting" color="#66b1ff"></ik-icon>
@@ -58,16 +58,18 @@ export default {
 import Icon from "../../../src/components/icon";
 export default {
   components: {
-    "ik-icon": Icon
-  }
+    "ik-icon": Icon,
+  },
 };
 </script>
 ```
+
 :::
 
 ### 图标集合
-       
-       
+
+<br />
+
 <ClientOnly>
 <icons-list />
 </ClientOnly>
