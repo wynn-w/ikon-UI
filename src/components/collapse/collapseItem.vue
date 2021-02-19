@@ -1,24 +1,27 @@
 <template>
-  <div class="ik-collapse-item" :data-itemName="name">
+
+  <div class="ik-collapse-item" :data-itemName="name" :key="name">
     <div class="ik-collapse-item__title" @click="onClick">
         <div class="title-content">
             <slot name="title">{{ title }}</slot>
         </div>
-      
       <div class="image-wrapper" ref="icon">
-          <ik-icon name="right"  class="image-content" color="#373133"><ik-icon>
+          <ik-icon name="ik-right"  class="image-content" color="#373133"><ik-icon>
       </div>
     </div>
-    <div class="ik-collapse-item__content" v-if="visibale">
+  <transition name="slide-fade">
+    <div class="ik-collapse-item__content" ref="collapseItemContent" v-if="visibale">
       <slot></slot>
     </div>
-  </div>
+  </transition>
+   
+  </div> 
 </template>
 
 <script>
 import Icon from '../icon'
 export default {
-  name: "ikCollapsItem",
+  name: "ik-collaps-item",
   components: {
     "ik-icon": Icon,
   },
@@ -58,21 +61,28 @@ export default {
     onOpen(){
       this.visibale = true
       this.$refs.icon.style.transform='rotate(90deg)'
+      this.$nextTick(()=>{
+        let content = this.$refs.collapseItemContent
+        content.style.setProperty('max-height',`${content.scrollHeight}px`)
+      })
     },
     onClose(){
       this.visibale = false
-      this.$refs.icon.style.transform='rotate(0)'
-    }
+      this.$refs.icon.style.setProperty('transform',`rotate(0)`)
+      this.$refs.collapseItemContent.style.setProperty('max-height',`0px`)  
+    },
   }
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scopde>
+
 $border-color: #ddd;
 $border-radius: 4px;
 .ik-collapse-item {
   width: 100%;
   border-bottom: 1px solid $border-color;
+  
   > .ik-collapse-item__title {
     display: flex;
     flex-direction: row;
@@ -86,14 +96,25 @@ $border-radius: 4px;
         display: flex;
         align-items: center;
         justify-content: center;
+        transition: all .3s ease;
         >.image-content {
-        transform: scale(.5);   
+        transform: scale(.7);   
         }
     }
   }
   &:last-child {
     margin-bottom: -1px;
   }
-  
+  > .ik-collapse-item__content{
+    max-height: 0;
+    overflow: hidden;
+    transition: all .3s ease;
+  }
+}
+.slide-fade-enter-active ,.slide-fade-leave-active{
+  transition: all 3s ease;
+}
+.slide-fade-enter, .slide-fade-leave-to{
+  opacity: 0; 
 }
 </style>

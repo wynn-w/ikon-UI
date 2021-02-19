@@ -1,13 +1,16 @@
 <template>
   <div class="ik-popover" ref="popover">
-    <div
-      class="ik-popover__content-wrapper"
-      :class="{ [`position-${position}`]: true }"
-      ref="contentWrapper"
-      v-if="visible"
-    >
-      <slot name="content">{{content}}</slot>
-    </div>
+    <transition name="slide-fade">
+      <div
+        class="ik-popover__content-wrapper"
+        :class="{ [`position-${position}`]: true }"
+        ref="contentWrapper"
+        v-if="visible"
+      >
+        <slot name="content">{{ content }}</slot>
+      </div>
+    </transition>
+
     <span class="ik-popover__trigger-wrapper" ref="triggerWrapper">
       <slot></slot>
     </span>
@@ -16,7 +19,7 @@
 
 <script>
 export default {
-  name: "IkPopover",
+  name: "ik-popover",
   props: {
     position: {
       type: String,
@@ -39,7 +42,12 @@ export default {
         return ["click", "hover", "focus"].includes(value) > -1;
       },
     },
-    content: String
+    content: String,
+  },
+  computed: {
+    slideFade() {
+      return `fade-${this.position}`;
+    },
   },
   data() {
     return {
@@ -49,9 +57,9 @@ export default {
   mounted() {
     this.addPopoverListeners();
   },
-  updated(){
-    if(this.trigger === 'hover' && this.$refs.contentWrapper){
-      this.addContentListeners()
+  updated() {
+    if (this.trigger === "hover" && this.$refs.contentWrapper) {
+      this.addContentListeners();
     }
   },
   destroyed() {
@@ -149,9 +157,9 @@ export default {
         }
       }
     },
-    addContentListeners(){
-        this.$refs.contentWrapper.addEventListener("mouseenter", this.open);
-        this.$refs.contentWrapper.addEventListener("mouseleave", this.close);
+    addContentListeners() {
+      this.$refs.contentWrapper.addEventListener("mouseenter", this.open);
+      this.$refs.contentWrapper.addEventListener("mouseleave", this.close);
     },
     removeAllListeners() {
       if (this.trigger === "click") {
@@ -170,7 +178,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .ik-popover {
   display: inline-block;
   vertical-align: top;
@@ -278,5 +286,16 @@ export default {
       right: calc(100% - 0.0929rem);
     }
   }
+}
+// 过渡动画
+.slide-fade-enter-active {
+  transition: opacity 0.5s ease;
+}
+.slide-fade-leave-active {
+  transition: opacity 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-fade-enter,
+.slide-fade-leave-to {
+  opacity: 0;
 }
 </style>
