@@ -15,11 +15,10 @@
 
 <script>
 export default {
-  name: "IkToast",
+  name: "ik-toast",
   props: {
     autoClose: {
-      type: [Boolean, Number],
-      default: 2000,
+      type: [Boolean, Number]
     },
     closeButton: {
       type: Object,
@@ -45,7 +44,6 @@ export default {
   data() {
     return {
       timer: "",
-      _delayTime: 2000,
     };
   },
   methods: {
@@ -71,11 +69,13 @@ export default {
     },
     execCloseDelay() {
       if (this.autoClose) {
+        console.log(this.autoClose);
         typeof this.autoClose === "boolean" && (this.autoClose = 2000)
         this.timer = setTimeout(() => {
           this.close();
           this.autoClose = false;
         }, this.autoClose);
+        console.log(this.autoClose);
       }
     },
   },
