@@ -1,14 +1,23 @@
 <template>
   <button
-    class="ik-button f-box"
-    :class="[{ [`icon-${iconPosition}`]: true }, { circle }]"
+    class="ik-button"
+    :class="[`ik-button--${type}`, classSize, { circle, round, plain }]"
     @click="$emit('click')"
   >
-    <ik-icon :name="icon" v-if="icon && !loading" class="_icon"></ik-icon>
-    <ik-icon name="ik-loading" v-if="loading" class="_icon loading"></ik-icon>
-    <div class="content" v-if="!circle">
-      <slot></slot>
-    </div>
+    <span
+      class="ik-button__content"
+      :class="`${classIconPosition} ${classHasIcon}`"
+    >
+      <ik-icon :name="icon" v-if="icon && !loading"></ik-icon>
+      <ik-icon name="ik-icon-loading" v-if="loading" class="loading"></ik-icon>
+      <span
+        class="ik-button__content__text"
+        v-if="!circle && this.$slots.default !== undefined"
+      >
+      <!-- 补充：在默认插槽为空时候显示 -->
+        <slot></slot>
+      </span>
+    </span>
   </button>
 </template>
 
@@ -16,9 +25,9 @@
 import Vue from "vue";
 import Icon from "../../icon";
 export default {
-  name: "IkButton",
+  name: "ik-button",
   props: {
-    icon: {},
+    icon: String,
     iconPosition: {
       type: String,
       default: "left",
@@ -26,45 +35,114 @@ export default {
         return !(value !== "left" && value !== "right");
       },
     },
-    loading: {
-      type: Boolean,
-      default: false,
-    },
+    loading: { type: Boolean, default: false },
     circle: { type: Boolean, default: false },
+    round: { type: Boolean, default: false },
+    plain: { type: Boolean, default: false },
+    size: {
+      type: String,
+      validator(value) {
+        return ["medium", "small", "mini"].indexOf(value) > -1;
+      },
+    },
+    type: {
+      type: String,
+      default: "default",
+      validator(value) {
+        return (
+          [
+            "default",
+            "primary",
+            "success",
+            "warning",
+            "danger",
+            "info",
+            "text",
+          ].indexOf(value) > -1
+        );
+      },
+    },
+  },
+  // 样式相关
+  computed: {
+    classIconPosition() {
+      return this.iconPosition === "right"
+        ? `ik-icon--${this.iconPosition}`
+        : "";
+    },
+    classHasIcon() {
+      return !!(this.icon || this.loading) ? "has-icon" : "";
+    },
+    classSize() {
+      return this.size && `ik-button--${this.size}`;
+    },
   },
   components: {
-    "ik-icon": Icon,
+    [Icon.name]: Icon,
   },
-  data() {
-    return {};
+  methods: {
+    /**
+     * @description: 接收到 circle 值时，设置按钮的宽高
+     * @param {*}
+     * @return {*}
+     */
+    handleIsCircle() {
+      const vm = this.$el;
+      if (vm.classList.contains("circle")) {
+        vm.classList.add("padding-0"); 
+        vm.style.setProperty("width", "32px");
+        vm.style.setProperty("height", "32px");
+      }
+    },
   },
-  methods: {},
   mounted() {
-    const _className = this.$el.className;
-    const _classList = this.$el.classList;
-    _className.match(/circle/g) &&
-      (() => {
-        _classList.remove(_className.match(/icon-(left|right)/g));
-        _classList.add("padding-0");
-        const farther = this.$el;
-        const child = this.$el.children[0];
-        child.style.setProperty("margin", "0");
-        farther.style.setProperty("width", "32px");
-        farther.style.setProperty("height", "32px");
-      })();
+    this.handleIsCircle();
   },
 };
 </script>
 
 <style lang="scss">
 $button-height: 32px;
-$font-size: 14px;
-$button-color: #fff;
-$button-bg: #409eff;
-$button-bg-focus: #3a8ee6;
-$border-radius: 0.4rem;
-$border-color: #409eff;
-$border-color-active: #3a8ee6;
+$font-size-default: 14px;
+$font-size-small: 12px;
+$border-radius: 0.2857em;
+
+$primary: #409eff;
+$success: #67c23a;
+$info: #909399;
+$warning: #e6a23c;
+$danger: #f56c6c;
+@mixin primary {
+  background-color: $primary;
+  border-color: $primary;
+  color: #fff;
+}
+@mixin success {
+  color: #fff;
+  background-color: $success;
+  border-color: $success;
+}
+@mixin info {
+  color: #fff;
+  background-color: $info;
+  border-color: $info;
+}
+@mixin warning {
+  color: #fff;
+  background-color: $warning;
+  border-color: $warning;
+}
+@mixin danger {
+  color: #fff;
+  background-color: $danger;
+  border-color: $danger;
+}
+@mixin text {
+  color: $primary;
+  background: none;
+  border: none;
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -73,64 +151,221 @@ $border-color-active: #3a8ee6;
     transform: rotate(360deg);
   }
 }
-.f-box {
-  display: inline-flex;
-  vertical-align: middle;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-
+// 初始样式
 .ik-button {
-  font-size: $font-size;
-  height: $button-height;
-  padding: 0 1rem;
+  line-height: 1;
+  font-size: $font-size-default;
+  padding: 10px 15px;
   border-radius: $border-radius;
-  border: 0.1rem solid $border-color;
-  background: $button-bg;
-  color: $button-color;
-  line-height: $font-size;
+  border: 1px solid #dcdfe6;
+  background: #ffffff;
+  color: #606266;
+  line-height: $font-size-default;
+  cursor: pointer;
+  transition: 0.1s;
+  .ik-button__content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    &.has-icon {
+      > .ik-button__content__text {
+        margin-left: 0.3571em;
+        word-break: keep-all;
+      }
+      &.ik-icon--right {
+        > .ik-button__content__text {
+          margin-left: 0;
+          order: 1;
+        }
+        > .ik-icon {
+          margin-left: 0.3571em;
+          order: 2;
+        }
+      }
+    }
+  }
+  &:focus,
   &:hover {
     opacity: 0.8;
+    color: $primary;
+    border-color: #c6e2ff;
+    background-color: #ecf5ff;
   }
   &:active {
-    opacity: 1 !important;
-    background: $border-color-active !important;
-    border: 0.1rem solid $border-color-active;
+    opacity: 1;
+    border: 1px solid $primary;
+    color: $primary;
   }
   &:focus {
-    opacity: 0.8;
     outline: none;
   }
-  > ._icon {
-    display: flex;
-    align-items: center;
-    order: 1;
-    margin-right: 0.3em;
-  }
-  > .content {
-    order: 2;
-  }
-  &.icon-right {
-    > .content {
-      order: 1;
-    }
-    > ._icon {
-      order: 2;
-      margin-left: 0.3em;
-      margin-right: 0;
-    }
-  }
-
   .loading {
     animation: spin 2s infinite linear;
   }
 }
+// 混入样式
+.ik-button--primary {
+  @include primary;
+  &:focus,
+  &:hover {
+    background: #66b1ff;
+    border-color: #66b1ff;
+    color: #ffffff;
+  }
+  &:active {
+    background: #3a8ee6;
+    border-color: #3a8ee6;
+    color: #ffffff;
+  }
+  &.plain {
+    color: $primary;
+    background: #ecf5ff;
+    border-color: #b3d8ff;
+    &:focus,
+    &:hover {
+      @include primary;
+    }
+  }
+}
+.ik-button--success {
+  @include success;
+  &:focus,
+  &:hover {
+    background: #85ce61;
+    border-color: #85ce61;
+    color: #fff;
+  }
+  &:active {
+    background: #5daf34;
+    border-color: #5daf34;
+    color: #ffffff;
+  }
+  &.plain {
+    color: $success;
+    background: #f0f9eb;
+    border-color: #c2e7b0;
+    &:focus,
+    &:hover {
+      @include success;
+    }
+  }
+}
+.ik-button--warning {
+  @include warning;
+  &:focus,
+  &:hover {
+    background: #ebb563;
+    border-color: #ebb563;
+    color: #ffffff;
+  }
+  &:active {
+    background: #cf9236;
+    border-color: #cf9236;
+    color: #ffffff;
+  }
+  &.plain {
+    color: #e6a23c;
+    background: #fdf6ec;
+    border-color: #f5dab1;
+    &:focus,
+    &:hover {
+      @include warning;
+    }
+  }
+}
+.ik-button--danger {
+  @include danger;
+  &:focus,
+  &:hover {
+    background: #f78989;
+    border-color: #f78989;
+    color: #ffffff;
+  }
+  &:active {
+    background: #dd6161;
+    border-color: #dd6161;
+    color: #ffffff;
+  }
+  &.plain {
+    color: #f56c6c;
+    background: #fef0f0;
+    border-color: #fbc4c4;
+    &:focus,
+    &:hover {
+      @include danger;
+    }
+  }
+}
+.ik-button--info {
+  @include info;
+  &:focus,
+  &:hover {
+    background: #a6a9ad;
+    border-color: #a6a9ad;
+    color: #ffffff;
+  }
+  &:active {
+    background: #82848a;
+    border-color: #82848a;
+    color: #ffffff;
+  }
+  &.plain {
+    color: #909399;
+    background: #f4f4f5;
+    border-color: #d3d4d6;
+    &:focus,
+    &:hover {
+      @include info;
+    }
+  }
+}
+.ik-button--text {
+  @include text;
+  &:focus,
+  &:hover {
+    background: none;
+    border: none;
+    color: #66b1ff;
+  }
+  &:active {
+    background: none;
+    border: none;
+    color: #3a8ee6;
+  }
+}
+
+.ik-button--medium {
+  padding: 9px 15px;
+}
+.ik-button--small {
+  padding: 8px 12px;
+  .ik-button__content__text {
+    font-size: $font-size-small;
+  }
+}
+.ik-button--mini {
+  padding: 6px 12px;
+  .ik-button__content__text {
+    font-size: $font-size-small;
+  }
+}
+// 特殊样式 
 .circle {
-  width: 1rem;
-  height: 1rem;
+  width: 14px;
   border-radius: 50%;
 }
+.round {
+  border-radius: 20px;
+}
+.plain {
+  &:focus,
+  &:hover {
+    background-color: transparent;
+  }
+}
+
 .padding-0 {
   padding: 0;
 }
