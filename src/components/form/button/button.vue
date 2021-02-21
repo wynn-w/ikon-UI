@@ -14,7 +14,7 @@
         class="ik-button__content__text"
         v-if="!circle && this.$slots.default !== undefined"
       >
-      <!-- 补充：在默认插槽为空时候显示 -->
+        <!-- 补充：在默认插槽为空时候显示 -->
         <slot></slot>
       </span>
     </span>
@@ -88,10 +88,15 @@ export default {
      */
     handleIsCircle() {
       const vm = this.$el;
+      const sizies = new Map()
+        .set("mini", `28px`)
+        .set("small", `32px`)
+        .set("medium", `34px`);
       if (vm.classList.contains("circle")) {
-        vm.classList.add("padding-0"); 
-        vm.style.setProperty("width", "32px");
-        vm.style.setProperty("height", "32px");
+        vm.classList.add("padding-0");
+        const value = this.size ? sizies.get(this.size) : "36px";
+        vm.style.setProperty("width", value);
+        vm.style.setProperty("height", value);
       }
     },
   },
@@ -155,12 +160,14 @@ $danger: #f56c6c;
 .ik-button {
   line-height: 1;
   font-size: $font-size-default;
-  padding: 10px 15px;
+  padding: 10px 18px;
   border-radius: $border-radius;
   border: 1px solid #dcdfe6;
   background: #ffffff;
   color: #606266;
   line-height: $font-size-default;
+  font-weight: 500;
+  white-space: nowrap;
   cursor: pointer;
   transition: 0.1s;
   .ik-button__content {
@@ -337,7 +344,7 @@ $danger: #f56c6c;
 }
 
 .ik-button--medium {
-  padding: 9px 15px;
+  padding: 9px 18px;
 }
 .ik-button--small {
   padding: 8px 12px;
@@ -351,7 +358,7 @@ $danger: #f56c6c;
     font-size: $font-size-small;
   }
 }
-// 特殊样式 
+// 特殊样式
 .circle {
   width: 14px;
   border-radius: 50%;
