@@ -1,41 +1,48 @@
 <template>
   <div class="ik-button-group">
-      <slot></slot>
+    <slot></slot>
   </div>
 </template>
 
 <script>
+import Vue from "vue";
 export default {
-    name: "IkButtonGroup",
-    mounted(){
-     for(const node of this.$el.children){
-       const name = node.nodeName.toLowerCase()
-       name != "button" && console.warn(`ik-button-group组件内的子元素存在 ${name} 标签,必须全为 button 标签！`)
-     }
+  name: "ik-button-group",
+  mounted() {
+    for (const node of this.$el.children) {
+      const name = node.nodeName.toLowerCase();
+      if (name != "button") {
+        throw Error(`ik-button-group 组件内的子元素存在 ${name} 标签,其子组件必须全为 ik-button 标签！`);
+      }
     }
-}
+  },
+};
 </script>
 
 <style lang="scss">
-.ik-button-group{
+$border-radius : 5.6px;
+.ik-button-group {
   display: inline-flex;
   vertical-align: middle;
   > .ik-button {
     border-radius: 0;
-    &:not(:last-child){
-      border-top: 0;
-      border-bottom: 0;
-      border-right: .1em solid rgba(255,255,255,.9);
+    &:not(:first-child) {
+      margin-left: -1px;
     }
-    &:first-child{
-      border-top-left-radius: var(--border-radius);
-      border-bottom-left-radius: var(--border-radius);
+    &:first-child {
+      border-top-left-radius: $border-radius;
+      border-bottom-left-radius: $border-radius;
     }
-    &:last-child{
-      border-top-right-radius: var(--border-radius);
-      border-bottom-right-radius: var(--border-radius);
+    &:last-child {
+      border-top-right-radius: $border-radius;
+      border-bottom-right-radius: $border-radius;
     }
-
+    &:hover,
+    &:focus,
+    &:active {
+      position: relative;
+      z-index: 1;
+    }
   }
 }
 </style>
