@@ -181,6 +181,9 @@ $danger: #f56c6c;
         margin-left: 0.3571em;
         word-break: keep-all;
       }
+      > .ik-icon {
+          order: 1;
+        }
       &.ik-icon--right {
         > .ik-button__content__text {
           margin-left: 0;
