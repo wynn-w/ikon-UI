@@ -1,17 +1,17 @@
 <template>
-  <div class="ik-container">
+  <div class="ik-main">
     <slot></slot>
   </div>
 </template>
 
 <script>
 export default {
-  name: "ik-container",
+  name: "ik-main",
 };
 </script>
 
 <style lang="scss">
-.container {
+.ik-main {
   flex-grow: 1;
 }
 </style>
