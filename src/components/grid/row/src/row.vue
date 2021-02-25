@@ -13,27 +13,37 @@ export default {
     },
     align: {
       type: String,
-      validator(value){
-        return ['left','right','center','space-between','space-around'].indexOf(value) > -1
-      }
+      validator(value) {
+        return (
+          ["left", "right", "center", "space-between", "space-around"].indexOf(
+            value
+          ) > -1
+        );
+      },
     },
   },
   mounted() {
     for (const child of this.$children) {
-      child.gutter = this.gutter;
+      if (child.$options.name == "ik-col") {
+        child.gutter = this.gutter;
+      }
     }
   },
   computed: {
     rowStyle() {
-      const GUTTER = this.gutter
-      return {
-        marginLeft: `${-GUTTER / 2}px`,
-        marginRight: `${-GUTTER / 2}px`,
-      };
+      if (!this.$children.some(child => $options.name != "ik-col")) {
+        return console.warn(`使用 gutter 属性需要 ik-row 的子组件全为 ik-col!`);
+      } else {
+        const GUTTER = this.gutter;
+        return {
+          marginLeft: `${-GUTTER / 2}px`,
+          marginRight: `${-GUTTER / 2}px`,
+        };
+      }
     },
-    rowClass(){
-      return this.align && `align-${this.align}`
-    }
+    rowClass() {
+      return this.align && `align-${this.align}`;
+    },
   },
 };
 </script>
@@ -43,20 +53,21 @@ export default {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  &.align-center{
+  align-items: baseline;
+  &.align-center {
     justify-content: center;
   }
-  &.align-left{
-     justify-content: flex-start;
+  &.align-left {
+    justify-content: flex-start;
   }
-  &.align-right{
-     justify-content: flex-end;
+  &.align-right {
+    justify-content: flex-end;
   }
-  &.align-between{
-     justify-content: space-between;
+  &.align-between {
+    justify-content: space-between;
   }
-  &.align-around{
-     justify-content: space-around;
+  &.align-around {
+    justify-content: space-around;
   }
 }
 </style>
