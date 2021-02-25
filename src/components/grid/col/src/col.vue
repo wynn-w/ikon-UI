@@ -5,11 +5,11 @@
 </template>
 
 <script>
-let validator = (value) => {
+let validator = value => {
   let flag = true;
   const key = Object.keys(value);
   for (const keyValue of key) {
-    !["span", "offset"].indexOf(keyValue) > -1 && (flag = false);
+    !(["span", "offset"].indexOf(keyValue) > -1) && (flag = false);
   }
   return flag;
 };
@@ -50,8 +50,9 @@ export default {
       if (!propObj) {
         return [];
       }
-      propObj.span && array.push(`ik-col-${devName}${propObj.span}`);
-      propObj.offset && array.push(`offset-${devName}${propObj.offset}`);
+      propObj.span && array.push(`ik-col--${devName}${propObj.span}`);
+      propObj.offset &&
+        array.push(`ik-col--offset-${devName}${propObj.offset}`);
       return array;
     },
   },
@@ -70,7 +71,7 @@ export default {
     colStyle() {
       const GUTTER = this.gutter;
       if (GUTTER) {
-        const res = `${GUTTER / 2}px`
+        const res = `${GUTTER / 2}px`;
         return {
           paddingLeft: res,
           paddingRight: res,
@@ -87,27 +88,28 @@ export default {
 .ik-col {
   min-height: 36px;
   border-radius: 0.2em;
-  $class-prefix: col-;
+  $class-prefix: ik-col--;
+  width:100%;
   $calcVal: 1 / 24 * 100%;
   @for $num from 1 through 24 {
     &.#{$class-prefix}#{$num} {
       width: $num * $calcVal;
     }
   }
-  $class-prefix: offset-;
+  $class-prefix: ik-col--offset-;
   @for $num from 1 through 24 {
     &.#{$class-prefix}#{$num} {
       margin-left: $num * $calcVal;
     }
   }
   @media (min-width: 568px) and (max-width: 768px) {
-    $class-prefix: ik-col-ipad-;
+    $class-prefix: ik-col--ipad-;
     @for $num from 1 through 24 {
       &.#{$class-prefix}#{$num} {
         width: $num * $calcVal;
       }
     }
-    $class-prefix: offset-ipad-;
+    $class-prefix: ik-col--offset-ipad-;
     @for $num from 1 through 24 {
       &.#{$class-prefix}#{$num} {
         margin-left: $num * $calcVal;
@@ -115,13 +117,13 @@ export default {
     }
   }
   @media (min-width: 769px) and (max-width: 992px) {
-    $class-prefix: ik-col-narrow-pc-;
+    $class-prefix: ik-col--narrow-pc-;
     @for $num from 1 through 24 {
       &.#{$class-prefix}#{$num} {
         width: $num * $calcVal;
       }
     }
-    $class-prefix: offset-narrow-pc-;
+    $class-prefix: ik-col--offset-narrow-pc-;
     @for $num from 1 through 24 {
       &.#{$class-prefix}#{$num} {
         margin-left: $num * $calcVal;
@@ -130,12 +132,12 @@ export default {
   }
   @media (min-width: 993px) and (max-width: 1200px) {
     @for $num from 1 through 24 {
-      $class-prefix: ik-col-pc-;
+      $class-prefix: ik-col--pc-;
       &.#{$class-prefix}#{$num} {
         width: $num * $calcVal;
       }
     }
-    $class-prefix: offset-pc-;
+    $class-prefix: ik-col--offset-pc-;
     @for $num from 1 through 24 {
       &.#{$class-prefix}#{$num} {
         margin-left: $num * $calcVal;
@@ -143,13 +145,13 @@ export default {
     }
   }
   @media (min-width: 1201px) {
-    $class-prefix: ik-col-wide-pc-;
+    $class-prefix: ik-col--wide-pc-;
     @for $num from 1 through 24 {
       &.#{$class-prefix}#{$num} {
         width: $num * $calcVal;
       }
     }
-    $class-prefix: offset-wide-pc-;
+    $class-prefix: ik-col--offset-wide-pc-;
     @for $num from 1 through 24 {
       &.#{$class-prefix}#{$num} {
         margin-left: $num * $calcVal;
