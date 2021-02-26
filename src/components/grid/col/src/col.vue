@@ -85,12 +85,13 @@ export default {
 </script>
 
 <style lang="scss">
+$class-prefix: ik-col--;
+$calcVal: 1 / 24 * 100%;
 .ik-col {
   min-height: 36px;
   border-radius: 0.2em;
-  $class-prefix: ik-col--;
-  width:100%;
-  $calcVal: 1 / 24 * 100%;
+  box-sizing: border-box;
+  width: 100%;
   @for $num from 1 through 24 {
     &.#{$class-prefix}#{$num} {
       width: $num * $calcVal;

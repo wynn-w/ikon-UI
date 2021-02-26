@@ -31,7 +31,7 @@ export default {
       type: String,
       default: "left",
       validator(value) {
-        return ["left","right"].indexOf(value) > -1
+        return ["left", "right"].indexOf(value) > -1;
       },
     },
     loading: { type: Boolean, default: false },
@@ -173,22 +173,23 @@ $danger: #f56c6c;
     justify-content: center;
     align-items: center;
     &.has-icon {
+      > .ik-icon {
+        color: #606266;
+        order: 1;
+      }
       > .ik-button__content__text {
         margin-left: 0.3571em;
         word-break: keep-all;
-         order: 2;
+        order: 2;
       }
-      > .ik-icon {
-          order: 1;
-        }
       &.ik-icon--right {
-        > .ik-button__content__text {
-          margin-left: 0;
-          order: 1;
-        }
         > .ik-icon {
           margin-left: 0.3571em;
           order: 2;
+        }
+        > .ik-button__content__text {
+          margin-left: 0;
+          order: 1;
         }
       }
     }
@@ -213,6 +214,19 @@ $danger: #f56c6c;
   }
 }
 // 混入样式
+.ik-button--primary,
+.ik-button--success,
+.ik-button--warning,
+.ik-button--danger,
+.ik-button--info {
+  .ik-button__content {
+    &.has-icon {
+      > .ik-icon {
+        color: #ffffff;
+      }
+    }
+  }
+}
 .ik-button--primary {
   @include primary;
   &:focus,
@@ -347,7 +361,7 @@ $danger: #f56c6c;
 }
 .ik-button--small {
   padding: 8px 12px;
-  
+
   .ik-button__content__text {
     font-size: $font-size-small;
   }

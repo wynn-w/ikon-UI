@@ -34,7 +34,7 @@ export default {
     },
   },
   mounted() {
-    this.isOpenWrap();
+    // this.isOpenWrap();
     for (const child of this.$children) {
       if (child.$options.name == "ik-col") {
         child.gutter = this.gutter;
@@ -66,7 +66,7 @@ export default {
       this.$children.some(child => {
         return child.ipad || child.pc || child.narrowPc || child.widePc;
       }) &&
-        window.outerWidth <= 375 &&
+        window.outerWidth <= 400 &&
         this.$el.style.setProperty("flex-wrap", "wrap");
     },
   },
@@ -77,8 +77,8 @@ export default {
 .ik-row {
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
-  justify-items: baseline;
+  flex-wrap: wrap;
+  align-items: center;
   &.ik-row--justify-center {
     justify-content: center;
   }

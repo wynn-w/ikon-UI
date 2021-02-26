@@ -233,6 +233,7 @@ $red: #f1453e;
   height: $height;
   outline: none;
   font-size: $font-size;
+  box-sizing: border-box;
   transition: all 0.1s;
   position: relative;
   cursor: pointer;
@@ -252,6 +253,7 @@ $red: #f1453e;
     }
   }
   > input {
+    width:100%;
     padding: 0 12px;
     border: 1px solid $border-color;
     border-radius: 4.6662px;
@@ -272,6 +274,9 @@ $red: #f1453e;
       border-color: #bbb;
       color: #bbb;
       cursor: not-allowed;
+    }
+    &[disabled] {
+      background-color: #f5f7fa;
     }
   }
 }
