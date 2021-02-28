@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import TabsBody from "../src/components/tabs/tabsBody";
+import TabsBody from "../src/components/tabs/tabsBody/src/tabsBody";
 
 Vue.component("ik-tabs-body", TabsBody)
 
