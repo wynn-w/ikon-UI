@@ -1,19 +1,24 @@
 <template>
-  <div class="tabs-pane" :class="classes" v-if="active" :data-paneName="name">
+  <div
+    class="ik-tabs-pane"
+    :class="classes"
+    v-if="active"
+    :data-paneName="name"
+  >
     <slot></slot>
   </div>
 </template>
 
 <script>
 export default {
-  name: "IkTabsPane",
+  name: "ik-tabs-pane",
   props: {
     name: {
-      type: [String,Number],
+      type: [String, Number],
       required: true,
-    }
+    },
   },
-  inject: ["eventBus"],
+  inject: ["eventBus", "height", "direction", "width"],
   data() {
     return {
       active: false,
@@ -21,16 +26,36 @@ export default {
   },
   computed: {
     classes() {
-      return [{ 'active': this.active }];
+      const isTrue = this.direction() == "left" || this.direction() == "right";
+      return [
+        { active: this.active },
+        { [`ik-tabs-pane--has-direction`]: isTrue },
+      ];
     },
   },
-  created(){
-    this.eventBus && 
-    this.eventBus.$on("updata:selected",(arg)=>{
-      return this.active = arg[0] === this.name
-    })
+  created() {
+    if (this.eventBus) {
+      this.eventBus.$on("updata:select", arg => {
+        const { selected } = arg;
+        return (this.active = selected === this.name);
+      });
+    }
+  },
+  mounted() {
+    this.eventBus && this.$nextTick(() => {
+        if(this.active)
+          this.height && this.$el.style.setProperty(`height`, `${this.height}`);
+          this.width && this.$el.style.setProperty(`width`, `${this.width}`);
+      });
   },
 };
 </script>
 
-<style></style>
+<style lang="scss">
+.ik-tabs-pane {
+  overflow: auto;
+  &.ik-tabs-pane--vertical {
+    height: 150px;
+  }
+}
+</style>

@@ -1,46 +1,69 @@
 <template>
-  <div :class="Classes">
-    <div class="tabs-head__nav-wrapper">
+  <div class="ik-tabs-head" :class="headDirection">
+    <div class=" ik-tabs-head__nav-wrapper">
       <slot></slot>
-      <div class="tabs-head__actions-wrapper">
+      <div class=" ik-tabs-head__actions-wrapper">
         <slot name="actions"></slot>
       </div>
-      <div class="tabs-head__line" ref="tabsHeadLine"></div>
+      <div class=" ik-tabs-head__line" ref="tabsHeadLine"></div>
     </div>
   </div>
 </template>
 <script>
 export default {
-  name: "IkTabsHead",
+  name: "ik-tabs-head",
   inject: ["eventBus", "direction"],
-  created() {
-    const parentComponentName = this.$parent.$options.name;
-    if (parentComponentName !== "IkTabs") {
-      console &&
-        console.warn &&
-        console.warn(
-          `ikTabsBody 的父组件必须为 ikTabs，但是当前 ikTabsBody 的父组件为 ${parentComponentName}`
-        );
-    }
-  },
-  mounted() {
-    this.eventBus &&
-      this.eventBus.$on("updata:selected", (arg) => {
-        const { left, top } = this.$el.getBoundingClientRect();
-        if (this.direction === "vertical") {
-          this.$refs.tabsHeadLine.style.height = `${arg[3]}px`;
-          this.$refs.tabsHeadLine.style.transform = `translateY(${arg[4] -
-            top}px)`;
-        } else {
-          this.$refs.tabsHeadLine.style.width = `${arg[1]}px`;
-          this.$refs.tabsHeadLine.style.transform = `translateX(${arg[2] -
-            left}px)`;
-        }
-      });
-  },
   computed: {
-    Classes() {
-      return `tabs-head--${this.direction}`;
+    headDirection() {
+      return `ik-tabs-head--${this.direction()}`;
+    },
+  },
+  watch: {
+    headDirection(newValue, old) {
+      this.setHandLineProperty();
+    },
+  },
+  created() {
+    const parentName = this.$parent.$options.name;
+    if (parentName !== "ik-tabs") {
+      return console.warn(
+        `ik-tabs-head 组件当前的父组件为: ${parentName}，期待父组件为 ik-tabs`
+      );
+    }
+    this.setHandLineProperty();
+  },
+  methods: {
+    cb(arg) {
+      const { left: headLeft, top: headTop } = this.$el.getBoundingClientRect();
+      const {
+        width: itemWidth,
+        left: itemLeft,
+        height: itemHeight,
+        top: itemTop,
+      } = arg;
+      const isTrue =
+        ["ik-tabs-head--left", "ik-tabs-head--right"].indexOf(
+          this.headDirection
+        ) > -1;
+      if (isTrue) {
+        this.$refs.tabsHeadLine.style.height = `${itemHeight}px`;
+        this.$refs.tabsHeadLine.style.width != "2px" &&
+          (this.$refs.tabsHeadLine.style.width = `2px`);
+        this.$refs.tabsHeadLine.style.transform = `translateY(${itemTop -
+          headTop}px)`;
+      } else {
+        this.$refs.tabsHeadLine.style.width = `${itemWidth}px`;
+        this.$refs.tabsHeadLine.style.height != "2px" &&
+          (this.$refs.tabsHeadLine.style.height = `2px`);
+        this.$refs.tabsHeadLine.style.transform = `translateX(${itemLeft -
+          headLeft}px)`;
+      }
+    },
+    setHandLineProperty() {
+      if (this.eventBus) {
+        this.eventBus.$on("updata:select", arg => this.cb(arg));
+        this.eventBus.$off("updata:select", arg => this.cb(arg));
+      }
     },
   },
 };
@@ -48,82 +71,112 @@ export default {
 
 <style lang="scss">
 $tabs-head-height: 3rem;
+$font-size: 14px;
 $line-color: #66b1ff;
-.tabs-head--horizontal {
+.ik-tabs-head {
   box-sizing: content-box;
   display: flex;
-  flex-direction: column;
+  flex-shrink: 0;
+  flex-direction: row;
   position: relative;
-  > .tabs-head__nav-wrapper {
+  > .ik-tabs-head__nav-wrapper {
     display: flex;
-    flex-direction: row;
-    > .tabs-head__line {
+    flex-shrink: 0;
+    flex-direction: column;
+    > .ik-tabs-head__line {
       position: absolute;
-      bottom: 0;
-      height: 0;
-      border-bottom: 0.1rem solid $line-color;
-      transition: all 0.3s;
+      background-color: $line-color;
+      transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
       z-index: 2;
     }
-    > .tabs-head__actions-wrapper {
+    > .ik-tabs-head__actions-wrapper {
       display: flex;
       justify-content: flex-start;
       flex-direction: column;
       margin-left: auto;
       justify-content: center;
       align-items: center;
-      padding: 0 1rem;
+      padding: 0 14px;
     }
   }
   &::after {
     content: "";
     position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 0.1rem;
-    box-sizing: border-box;
-    border-bottom: 0.1rem solid #dddddd;
+    background-color: #dddddd;
     z-index: 1;
   }
 }
-.tabs-head--vertical {
-  box-sizing: content-box;
-  display: flex;
-  flex-direction: row;
-  position: relative;
-  > .tabs-head__nav-wrapper {
-    display: flex;
-    flex-direction: column;
-    > .tabs-head__line {
-      position: absolute;
-      left: auto;
-      width: 0.1rem;
+.ik-tabs-head--left {
+  flex-direction: column;
+  > .ik-tabs-head__nav-wrapper {
+    > .ik-tabs-head__line {
+      width: 2px;
       right: 0;
       height: 0;
-      background-color: $line-color;
-      transition: all 0.3s;
-      z-index: 2;
-    }
-    .tabs-head__actions-wrapper {
-      display: flex;
-      justify-content: flex-start;
-      flex-direction: column;
-      margin-left: auto;
-      justify-content: center;
-      align-items: center;
-      padding: 0 1rem;
     }
   }
   &::after {
-    content: "";
-    position: absolute;
     right: 0;
-    width: 0.1rem;
+    width: 2px;
     top: 0;
     height: 100%;
-    background-color: #dddddd;
-    z-index: 1;
+  }
+}
+.ik-tabs-head--top {
+  margin-bottom: 14px;
+  > .ik-tabs-head__nav-wrapper {
+    flex-direction: row;
+    > .ik-tabs-head__line {
+      position: absolute;
+      bottom: 0;
+      height: 0;
+      border-bottom: 2px solid $line-color;
+      z-index: 2;
+    }
+  }
+  &::after {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+  }
+}
+.ik-tabs-head--bottom {
+  > .ik-tabs-head__nav-wrapper {
+    flex-direction: row;
+    > .ik-tabs-head__line {
+      position: absolute;
+      bottom: 0;
+      height: 0;
+      border-bottom: 2px solid $line-color;
+      z-index: 2;
+    }
+  }
+  &::after {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+  }
+}
+.ik-tabs-head--right {
+  > .ik-tabs-head__nav-wrapper {
+    flex-direction: column;
+    > .ik-tabs-head__line {
+      position: absolute;
+      left: auto;
+      width: 2px;
+      left: 0;
+      height: 0;
+      background-color: $line-color;
+      z-index: 2;
+    }
+  }
+  &::after {
+    left: 0;
+    width: 2px;
+    top: 0;
+    height: 100%;
   }
 }
 </style>
