@@ -15,20 +15,20 @@ title: 气泡卡片 - Popover
 <template>
   <div class="source popover-center-box">
     <ik-row justify="center">
-      <ik-popover position="top" content="top 顶部提示文字">
+      <ik-popover position="top" content="顶部文字">
         <ik-button>顶部 </ik-button>
       </ik-popover>
     </ik-row>
     <ik-row justify="space-between">
-      <ik-popover position="left" content="left 左部提示文字">
+      <ik-popover position="left" content="左部文字">
         <ik-button>左部</ik-button>
       </ik-popover>
-      <ik-popover position="right" content="right 右部提示文字">
+      <ik-popover position="right" content="右部文字">
         <ik-button>右部</ik-button>
       </ik-popover>
     </ik-row>
     <ik-row justify="center">
-      <ik-popover position="bottom" content="bottom 底部提示文字"
+      <ik-popover position="bottom" content="底部文字"
         ><ik-button>底部</ik-button>
       </ik-popover>
     </ik-row>
@@ -105,5 +105,5 @@ title: 气泡卡片 - Popover
 | :------- | :----- | :----- | :-------------------- | :--------- |
 | position | String | top    | top/right/bottom/left | 出现位置   |
 | trigger  | String | click  | click/hover/focus     | 触发方式   |
-| width    | String | ——     | 示例： width="80px"   | 弹出框宽度 |
-| content  | String | ——     | ——                    | 弹出框内容 |
+| width    | String |       | 示例： width="80px"   | 弹出框宽度 |
+| content  | String |       |                      | 弹出框内容 |

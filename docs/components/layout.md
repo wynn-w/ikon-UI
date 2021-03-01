@@ -117,20 +117,20 @@ body > .ik-layout {
 
 :::
 
-## Header Attributes
+### Header Attributes
 
 | 属性名 | 类型   | 默认值 | 可选值 | 说明     |
 | :----- | :----- | :----- | :----- | :------- |
-| height | String | 60px   | ——     | 顶栏高度 |
+| height | String | 60px   |       | 顶栏高度 |
 
-## Aside Attributes
-
-| 属性名 | 类型   | 默认值 | 可选值 | 说明     |
-| :----- | :----- | :----- | :----- | :------- |
-| width  | String | 60px   | ——     | 顶栏高度 |
-
-## Footer Attributes
+### Aside Attributes
 
 | 属性名 | 类型   | 默认值 | 可选值 | 说明     |
 | :----- | :----- | :----- | :----- | :------- |
-| height | String | 60px   | ——     | 顶栏高度 |
+| width  | String | 60px   |       | 顶栏高度 |
+
+### Footer Attributes
+
+| 属性名 | 类型   | 默认值 | 可选值 | 说明     |
+| :----- | :----- | :----- | :----- | :------- |
+| height | String | 60px   |       | 顶栏高度 |

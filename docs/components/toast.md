@@ -120,9 +120,9 @@ export default {
 
 ### Attributes
 
-| 属性名      | 类型            | 默认值 | 可选值                                                 | 说明                                    |
-| :---------- | :-------------- | :----- | :----------------------------------------------------- | :-------------------------------------- |
-| autoClose   | Boolean, Number | false  | 值为 true 时，默认 2000ms                              | 是否自动关闭以及延时时间（默认单位 ms） |
-| position    | String          | top    | top/middle/bottom                                      | 弹出位置                                |
+| 属性名      | 类型            | 默认值 | 可选值                                                  | 说明                                    |
+| :---------- | :-------------- | :----- | :------------------------------------------------------ | :-------------------------------------- |
+| autoClose   | Boolean, Number | false  | 值为 true 时，默认 2000ms                               | 是否自动关闭以及延时时间（默认单位 ms） |
+| position    | String          | top    | top/middle/bottom                                       | 弹出位置                                |
 | closeButton | Object          |        | 参考：closeButton：{text : "text",callback(toast) {...} | 关闭按钮类容                            |
-| enableHTML  | Boolean         | false  | ——                                                     | 支持 HTML                               |
+| enableHTML  | Boolean         | false  |                                                         | 支持 HTML                               |

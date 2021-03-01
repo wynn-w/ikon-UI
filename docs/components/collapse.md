@@ -1,8 +1,8 @@
 ---
-title: Collapse
+title: 折叠面板 - Collapse
 ---
 
-# Collapse 折叠面板
+# 折叠面板 - Collapse
 
 通过折叠面板收纳内容区域
 
@@ -94,12 +94,12 @@ export default {
 
 | 属性名   | 类型    | 默认值 | 可选值 | 说明           |
 | :------- | :------ | :----- | :----- | :------------- |
-| single   | Boolean | false  | ——     | 是否手风琴模式 |
-| selected | Array   | ——     | ——     | 默认打开的标签 |
+| single   | Boolean | false  |       | 是否手风琴模式 |
+| selected | Array   |       |       | 默认打开的标签 |
 
 ### CollapseItem Attributes
 
 | 属性名 | 类型   | 默认值 | 可选值 | 说明                            |
 | :----- | :----- | :----- | :----- | :------------------------------ |
-| title  | String |        | ——     | 标题（必须）                    |
-| name   | String | ——     | ——     | 名称，item 的唯一标识符（必须） |
+| title  | String |        |       | 标题（必须）                    |
+| name   | String |       |       | 名称，item 的唯一标识符（必须） |

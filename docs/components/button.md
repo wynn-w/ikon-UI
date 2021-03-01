@@ -1,8 +1,8 @@
 ---
-title: Button
+title: 按钮 - Button
 ---
 
-# Button 按钮
+# 按钮 - Button
 
 常用的操作按钮
 
@@ -13,7 +13,7 @@ title: Button
 ```vue
 <template>
   <div class="sources">
-    <ik-row class="button__row">
+    <ik-row>
       <ik-button>默认按钮</ik-button>
       <ik-button type="primary">主要按钮</ik-button>
       <ik-button type="success">成功按钮</ik-button>
@@ -21,7 +21,7 @@ title: Button
       <ik-button type="danger">危险按钮</ik-button>
       <ik-button type="info">提示按钮</ik-button>
     </ik-row>
-    <ik-row class="button__row">
+    <ik-row>
       <ik-button plain>朴素按钮</ik-button>
       <ik-button plain type="primary">主要按钮</ik-button>
       <ik-button plain type="success">成功按钮</ik-button>
@@ -29,7 +29,7 @@ title: Button
       <ik-button plain type="danger">危险按钮</ik-button>
       <ik-button plain type="info">提示按钮</ik-button>
     </ik-row>
-    <ik-row class="button__row">
+    <ik-row>
       <ik-button round>圆角按钮</ik-button>
       <ik-button round type="primary">主要按钮</ik-button>
       <ik-button round type="success">成功按钮</ik-button>
@@ -38,7 +38,7 @@ title: Button
       <ik-button round type="info">提示按钮</ik-button>
     </ik-row>
 
-    <ik-row class="button__row">
+    <ik-row>
       <ik-button circle icon="ik-icon-setting"></ik-button>
       <ik-button circle icon="ik-icon-edit" type="primary"></ik-button>
       <ik-button circle icon="ik-icon-success" type="success"></ik-button>
@@ -50,69 +50,16 @@ title: Button
 </template>
 
 <style>
-.button__row {
+.ik-row {
   margin-top: 10px;
 }
-.button__row > .ik-button {
-  margin-right: 4px;
+.ik-row > .ik-button {
+  margin: 4px 4px 0;
 }
 </style>
 ```
 
 :::
-
-<!-- ## 禁用状态
-
-按钮不可用状态。
-
-::: demo
-
-```vue
-<template>
-  <div class="sources">
-    <ik-row class="button__row">
-      <ik-button disabled  >默认按钮</ik-button>
-      <ik-button disabled type="primary">主要按钮</ik-button>
-      <ik-button disabled type="success">成功按钮</ik-button>
-      <ik-button disabled type="warning">警告按钮</ik-button>
-      <ik-button disabled type="danger">危险按钮</ik-button>
-      <ik-button disabled type="info">提示按钮</ik-button>
-    </ik-row>
-    <ik-row class="button__row">
-      <ik-button plain>朴素按钮</ik-button>
-      <ik-button plain type="primary">主要按钮</ik-button>
-      <ik-button plain type="success">成功按钮</ik-button>
-      <ik-button plain type="warning">警告按钮</ik-button>
-      <ik-button plain type="danger">危险按钮</ik-button>
-      <ik-button plain type="info">提示按钮</ik-button>
-    </ik-row>
-    <ik-row class="button__row">
-      <ik-button round>圆角按钮</ik-button>
-      <ik-button round type="primary">主要按钮</ik-button>
-      <ik-button round type="success">成功按钮</ik-button>
-      <ik-button round type="warning">警告按钮</ik-button>
-      <ik-button round type="danger">危险按钮</ik-button>
-      <ik-button round type="info">提示按钮</ik-button>
-    </ik-row>
-
-  </div>
-</template>
-
-<style >
-.button__row {
-  margin-top: 10px;
-}
-.button__row  > .ik-button{
-    margin-right: 4px
-}
-</style>
-```
-
-::: -->
-
-<!-- ## 只读状态
-
-按钮只读状态。 -->
 
 ## 图标按钮
 
@@ -122,21 +69,19 @@ title: Button
 ```vue
 <template>
   <div class="sources">
-    <ik-row class="button__row">
-      <ik-button  icon="ik-icon-share"></ik-button>
-      <ik-button  icon="ik-icon-search">搜索</ik-button>
-      <ik-button  icon="ik-icon-setting" iconPosition="right"
-        >设置</ik-button
-      >
+    <ik-row>
+      <ik-button icon="ik-icon-share"></ik-button>
+      <ik-button icon="ik-icon-search">搜索</ik-button>
+      <ik-button icon="ik-icon-setting" iconPosition="right">设置</ik-button>
     </ik-row>
   </div>
 </template>
 
 <style>
-.button__row {
+.ik-row {
   margin-top: 10px;
 }
-.button__row > .ik-button {
+.ik-row > .ik-button {
   margin-right: 4px;
 }
 </style>
@@ -152,15 +97,15 @@ title: Button
 ```vue
 <template>
   <div class="sources">
-    <ik-row class="button__row">
+    <ik-row>
       <ik-button :loading="true" iconPosition="right">设置</ik-button>
       <ik-button
-              :loading="isLoding1"
-              iconPosition="right"
-              @click="isLoding1 = !isLoding1"
-              title="点击出现/隐藏loading"
-              >点击切换</ik-button
-            >
+        :loading="isLoding1"
+        iconPosition="right"
+        @click="isLoding1 = !isLoding1"
+        title="点击出现/隐藏loading"
+        >点击切换</ik-button
+      >
     </ik-row>
   </div>
 </template>
@@ -169,7 +114,7 @@ export default {
   name: "app",
   data() {
     return {
-      isLoding1: true
+      isLoding1: true,
     };
   },
 };
@@ -186,7 +131,7 @@ export default {
 ```vue
 <template>
   <div class="sources">
-    <ik-row class="button__row">
+    <ik-row>
       <ik-button type="text">文字按钮</ik-button>
     </ik-row>
   </div>
@@ -222,12 +167,12 @@ Button 组件提供除了默认值以外的三种尺寸，可以在不同场景�
 
 ```vue
 <template>
-  <div class="sources">
+  <ik-row class="sources">
     <ik-button>正常按钮</ik-button>
     <ik-button size="medium">中等按钮</ik-button>
     <ik-button size="small">小型按钮</ik-button>
     <ik-button size="mini">迷你按钮</ik-button>
-  </div>
+  </ik-row>
 </template>
 ```
 
@@ -237,13 +182,13 @@ Button 组件提供除了默认值以外的三种尺寸，可以在不同场景�
 
 通过设置 Button 的属性来产生不同的按钮样式
 
-| 属性名   | 类型     | 默认值  | 可选值                   | 说明      |
-| :-------| :-----| :------- | :---------------       | :------------------- |
-| icon     |  String  |         | 参考 icon                |页设置显示图标  |
-| iconPosition | String |  left| left/right                       | 图标位置 |
-| loading | Boolean | false | ——                           |是否为加载状态 |
-| circle | Boolean | false | ——                            |是否圆形按钮 |
-| round | Boolean | false | ——                             |是否圆角按钮 |
-| plain | Boolean | false | ——                             |是否朴素按钮 |
-| size | String |  —— |medium/small/mini                   |按钮尺寸 |
-| type | String |  —— |default/primary/success/warning/danger/info/text|按钮类型 |
+| 属性名       | 类型    | 默认值 | 可选值                                           | 说明           |
+| :----------- | :------ | :----- | :----------------------------------------------- | :------------- |
+| icon         | String  |        | 参考 icon                                        | 页设置显示图标 |
+| iconPosition | String  | left   | left/right                                       | 图标位置       |
+| loading      | Boolean | false  |                                                  | 是否为加载状态 |
+| circle       | Boolean | false  |                                                  | 是否圆形按钮   |
+| round        | Boolean | false  |                                                  | 是否圆角按钮   |
+| plain        | Boolean | false  |                                                  | 是否朴素按钮   |
+| size         | String  |        | medium/small/mini                                | 按钮尺寸       |
+| type         | String  |        | default/primary/success/warning/danger/info/text | 按钮类型       |
