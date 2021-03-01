@@ -44,6 +44,7 @@ export default {
   mounted() {
     this.eventBus && this.$nextTick(() => {
         if(this.active)
+
           this.height && this.$el.style.setProperty(`height`, `${this.height}`);
           this.width && this.$el.style.setProperty(`width`, `${this.width}`);
       });

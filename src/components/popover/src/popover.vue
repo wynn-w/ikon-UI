@@ -63,7 +63,7 @@ export default {
     }
   },
   destroyed() {
-    this.emoveAllListeners();
+      this.removeAllListeners();
   },
   methods: {
     onClickPopover(e) {
@@ -80,7 +80,7 @@ export default {
     },
     close() {
       this.visible = false;
-      document.emoveEventListener("click", this.eventHandler);
+      document.removeEventListener("click", this.eventHandler);
     },
     setContentPosition() {
       const contentWrapper = this.$refs.contentWrapper;
@@ -95,11 +95,11 @@ export default {
         const _max = window.innerWidth ? window.innerWidth : 1920;
         let elementWidth = this.$refs.contentWrapper.style.width;
         if (_width < _min) {
-          elementWidth = `${_min}px`;
+          elementWidth = `${_min}`;
         } else if (_width > _max) {
-          elementWidth = `${_max}px`;
+          elementWidth = `${_max}`;
         } else {
-          elementWidth = `${_width}px`;
+          elementWidth = `${_width}`;
         }
       }
     },
@@ -112,6 +112,7 @@ export default {
         left,
       } = triggerWrapper.getBoundingClientRect();
       const { height: contentHeight } = contentWrapper.getBoundingClientRect();
+      console.log(contentWrapper.offsetLeft);
       const postions = new Map()
         .set("top", {
           left: `${left + window.scrollX}px`,
@@ -161,17 +162,17 @@ export default {
       this.$refs.contentWrapper.addEventListener("mouseenter", this.open);
       this.$refs.contentWrapper.addEventListener("mouseleave", this.close);
     },
-    emoveAllListeners() {
+    removeAllListeners() {
       if (this.trigger === "click") {
-        this.$refs.popover.emoveEventListener("click", this.onClickPopover);
+        this.$refs.popover.removeEventListener("click", this.onClickPopover);
       } else if (this.trigger === "hover") {
-        this.$refs.popover.emoveEventListener("mouseenter", this.open);
-        this.$refs.popover.emoveEventListener("mouseleave", this.close);
-        this.$refs.contentWrapper.emoveEventListener("mouseenter", this.open);
-        this.$refs.contentWrapper.emoveEventListener("mouseleave", this.close);
+        this.$refs.popover.removeEventListener("mouseenter", this.open);
+        this.$refs.popover.removeEventListener("mouseleave", this.close);
+        this.$refs.contentWrapper.removeEventListener("mouseenter", this.open);
+        this.$refs.contentWrapper.removeEventListener("mouseleave", this.close);
       } else {
-        this.$refs.popover.emoveEventListener("mousedown", this.open);
-        this.$refs.popover.emoveEventListener("mouseup", this.close);
+        this.$refs.popover.removeEventListener("mousedown", this.open);
+        this.$refs.popover.removeEventListener("mouseup", this.close);
       }
     },
   },
@@ -179,31 +180,31 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$font-size: 14px;
 .ik-popover {
   display: inline-block;
   vertical-align: top;
   position: relative;
-  font-size: $font-size;
-
+  font-size: 14px;
 }
 .ik-popover__content-wrapper {
   display: inline-block;
   box-sizing: content-box;
   position: absolute;
-  padding: 0.5em 0.7em;
-  border: 0.0714em solid #dcdfe6;
-  border-radius: 0.3571em;
+  padding: 0.5rem 0.7rem;
+  border: 0.0714rem solid #dcdfe6;
+  border-radius: 0.3571rem;
+  color: #606266;
+  z-index: 3;
   background-color: #ffffff;
   @supports (filter: drop-shadow()) {
-    filter: drop-shadow(0 0.1429em 0.8571em 0 #dcdfe6);
+    filter: drop-shadow(0 2.0006px 11.9994px 0 #dcdfe6);
   }
   @supports not (filter: drop-shadow()) {
-    box-shadow: (0 0.1429em 0.8571em 0 #dcdfe6);
+    box-shadow: (0 2.0006px 11.9994px 0 #dcdfe6);
   }
   // 中文无效
   word-break: break-all;
-  max-width: 20em;
+  max-width: 20rem;
   &.position-top,
   &.position-bottom,
   &.position-left,
@@ -217,7 +218,7 @@ $font-size: 14px;
       //兼容性
       font-size: 0;
       line-height: 0;
-      border: 0.5em dashed transparent;
+      border: 7px dashed transparent;
       //
       position: absolute;
     }
@@ -225,68 +226,68 @@ $font-size: 14px;
   &.position-top {
     left: 0;
     transform: translateY(-100%);
-    margin-top: -0.8em;
+    margin-top: -18px;
     &::before,
     &::after {
-      left: 0.7143em;
+      left: 10.0002px;
     }
     &::before {
-      border-top: 0.5em solid #dcdfe6;
+      border-top: 7px solid #dcdfe6;
       top: 100%;
     }
     &::after {
-      border-top: 0.5em solid #ffffff;
-      top: calc(100% - 0.0929em);
+      border-top: 7px solid #ffffff;
+      top: calc(100% - 1.3006px);
     }
   }
   &.position-bottom {
     left: 0;
-    margin-top: 0.8em;
+    margin-top: 18px;
     &::before,
     &::after {
-      left: 0.7143em;
+      left: 10.0002px;
     }
     &::before {
-      border-bottom: 0.5em solid #dcdfe6;
+      border-bottom: 7px solid #dcdfe6;
       bottom: 100%;
     }
     &::after {
-      border-bottom: 0.5em solid #ffffff;
-      bottom: calc(100% - 0.0929em);
+      border-bottom: 7px solid #ffffff;
+      bottom: calc(100% - 1.3006px);
     }
   }
   &.position-left {
     // left: 0;
     transform: translateX(-100%);
-    margin-left: -0.8em;
+    margin-left: -11.2px;
     &::before,
     &::after {
       top: 50%;
       transform: translateY(-50%);
     }
     &::before {
-      border-left: 0.5em solid #dcdfe6;
+      border-left: 7px solid #dcdfe6;
       left: 100%;
     }
     &::after {
-      border-left: 0.5em solid #ffffff;
-      left: calc(100% - 0.0929em);
+      border-left: 7px solid #ffffff;
+      left: calc(100% - 1.3006px);
     }
   }
   &.position-right {
-    margin-left: 0.8em;
+    margin-left: 11.2px;
     &::before,
     &::after {
       top: 50%;
       transform: translateY(-50%);
     }
     &::before {
-      border-right: 0.5em solid #dcdfe6;
+      border-right: 7px solid #dcdfe6;
       right: 100%;
     }
     &::after {
-      border-right: 0.5em solid #ffffff;
-      right: calc(100% - 0.0929em);
+      border-right: 7px solid #ffffff;
+      right: calc(100% - 1.3006px);
     }
   }
 }

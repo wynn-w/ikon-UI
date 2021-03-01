@@ -200,6 +200,11 @@ $danger: #f56c6c;
     color: $primary;
     border-color: #c6e2ff;
     background-color: #ecf5ff;
+    > .ik-button__content {
+      > .ik-icon {
+        color: $primary;
+      }
+    }
   }
   &:active {
     opacity: 1;
@@ -247,6 +252,16 @@ $danger: #f56c6c;
     &:focus,
     &:hover {
       @include primary;
+      .ik-icon {
+        color: #ffffff !important ;
+      }
+    }
+    .ik-button__content {
+      &.has-icon {
+        > .ik-icon {
+          color: $primary;
+        }
+      }
     }
   }
 }
@@ -270,6 +285,16 @@ $danger: #f56c6c;
     &:focus,
     &:hover {
       @include success;
+      .ik-icon {
+        color: #ffffff !important ;
+      }
+    }
+    .ik-button__content {
+      &.has-icon {
+        > .ik-icon {
+          color: $success;
+        }
+      }
     }
   }
 }
@@ -293,6 +318,16 @@ $danger: #f56c6c;
     &:focus,
     &:hover {
       @include warning;
+      .ik-icon {
+        color: #ffffff !important ;
+      }
+    }
+    .ik-button__content {
+      &.has-icon {
+        > .ik-icon {
+          color: $warning !important;
+        }
+      }
     }
   }
 }
@@ -316,6 +351,16 @@ $danger: #f56c6c;
     &:focus,
     &:hover {
       @include danger;
+      .ik-icon {
+        color: #ffffff !important ;
+      }
+    }
+    .ik-button__content {
+      &.has-icon {
+        > .ik-icon {
+          color: $danger;
+        }
+      }
     }
   }
 }
@@ -339,6 +384,16 @@ $danger: #f56c6c;
     &:focus,
     &:hover {
       @include info;
+      .ik-icon {
+        color: #ffffff !important ;
+      }
+    }
+    .ik-button__content {
+      &.has-icon {
+        > .ik-icon {
+          color: $info;
+        }
+      }
     }
   }
 }
@@ -349,11 +404,32 @@ $danger: #f56c6c;
     background: none;
     border: none;
     color: #66b1ff;
+    .ik-button__content {
+      &.has-icon {
+        > .ik-icon {
+          color: #66b1ff;
+        }
+      }
+    }
   }
   &:active {
     background: none;
     border: none;
     color: #3a8ee6;
+    .ik-button__content {
+      &.has-icon {
+        > .ik-icon {
+          color: #3a8ee6;
+        }
+      }
+    }
+  }
+  .ik-button__content {
+    &.has-icon {
+      > .ik-icon {
+        color: $primary;
+      }
+    }
   }
 }
 .ik-button--medium {

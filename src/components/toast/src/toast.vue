@@ -69,13 +69,11 @@ export default {
     },
     execCloseDelay() {
       if (this.autoClose) {
-        console.log(this.autoClose);
         typeof this.autoClose === "boolean" && (this.autoClose = 2000)
         this.timer = setTimeout(() => {
           this.close();
           this.autoClose = false;
         }, this.autoClose);
-        console.log(this.autoClose);
       }
     },
   },
@@ -137,6 +135,7 @@ $toast-color: #ffffff;
   font-size: $font-size;
   position: fixed;
   left: 50%;
+  z-index: 99;
   &.position-top {
     top: 0;
     transform: translateX(-50%);
@@ -148,12 +147,12 @@ $toast-color: #ffffff;
   }
   &.position-middle {
     top: 50%;
-    transform: translate(-50%);
+    transform: translateX(-50%) translateY(-50%);
     .toast {
       animation: fade-in 300ms;
     }
   }
-  &.position-bottom {
+  &.position-bottom { 
     bottom: 0;
     transform: translate(-50%);
     .toast {

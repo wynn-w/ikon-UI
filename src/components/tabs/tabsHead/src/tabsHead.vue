@@ -47,14 +47,14 @@ export default {
         ) > -1;
       if (isTrue) {
         this.$refs.tabsHeadLine.style.height = `${itemHeight}px`;
-        this.$refs.tabsHeadLine.style.width != "2px" &&
-          (this.$refs.tabsHeadLine.style.width = `2px`);
+        // this.$refs.tabsHeadLine.style.width != "2px" &&
+        //   (this.$refs.tabsHeadLine.style.width = `2px`);
         this.$refs.tabsHeadLine.style.transform = `translateY(${itemTop -
           headTop}px)`;
       } else {
         this.$refs.tabsHeadLine.style.width = `${itemWidth}px`;
-        this.$refs.tabsHeadLine.style.height != "2px" &&
-          (this.$refs.tabsHeadLine.style.height = `2px`);
+        // this.$refs.tabsHeadLine.style.height != "2px" &&
+        //   (this.$refs.tabsHeadLine.style.height = `2px`);
         this.$refs.tabsHeadLine.style.transform = `translateX(${itemLeft -
           headLeft}px)`;
       }
