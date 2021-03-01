@@ -1,82 +1,41 @@
 ---
-title: "icon"
+title: 图标 - Icon
 ---
 
-# Icon 图标
+# 图标 - Icon
 
-提供了一套常用的图标集合。
+提供了一套 ikon UI 用到过的图标集合。
 
-### 基本用法
-<br />
+## 使用方法
 
-<ClientOnly>
-<icons-show />
-</ClientOnly>
+直接通过 name 属性可使用期望的样式。例如
+::: demo
 
-::: details 点击查看源码
 ```vue
-<div>
-  <ik-icon name="setting"></ik-icon>
-  <ik-icon name="delete"></ik-icon>
-  <ik-button :loading="true"> 加载中</ik-button>
-</div>
-
-<script>
-  data() {
-    return {
-      names: [
-        ["ik-bottom", "ik-top", "ik-left", "ik-right"],
-        ["ik-setting", "ik-loading", "ik-download", "ik-delete"],
-        ["ik-edit", "ik-Shapex", "ik-success"],
-      ],
-    };
-  },
-};
-</script>
+<template>
+  <div class="source">
+    <ik-row>
+      <ik-icon name="ik-icon-success"></ik-icon>
+      <ik-icon name="ik-icon-loading"></ik-icon>
+      <ik-icon name="ik-icon-share"></ik-icon>
+    </ik-row>
+  </div>
+</template>
+<style>
+.ik-row > .ik-icon {
+  margin: 4px 8px;
+}
+</style>
 ```
 
 :::
 
-### 自定义图标颜色
+## 图标集合
 
-<br />
+<icon/>
 
-<ClientOnly>
-<icons-showColor />
-</ClientOnly>
+### Attributes
 
-::: details 点击查看源码
-
-```vue
-<div>
-  <ik-icon name="i-setting" color="#66b1ff"></ik-icon>
-  <ik-icon name="i-delete" color="#fc5531"></ik-icon>
-  <ik-icon name="ik-edit" color="#3eaf7c"></ik-icon>
-</div>
-
-<script>
-import Icon from "../../../src/components/icon";
-export default {
-  components: {
-    "ik-icon": Icon,
-  },
-};
-</script>
-```
-
-:::
-
-### 图标集合
-
-<br />
-
-<ClientOnly>
-<icons-list />
-</ClientOnly>
-
-### API
-
-| 属性名  | 默认值  | 说明                                |
-| :-----: | :-----: | :---------------------------------- |
-| `name`  |         | 设置显示图标                        |
-| `color` | #ffffff | 自定义图标颜色（三/六位 16 进制值） |
+| 属性名 | 类型   | 默认值 | 可选值       | 说明       |
+| :----- | :----- | :-----: | :----------- | :--------- |
+| name   | String | ——     | 参考图标集合 | 设置图标名 |
