@@ -1,6 +1,6 @@
 const expect = chai.expect;
 import Vue from 'vue'
-import Button from '../src/components/form/button/button.vue'
+import Button from '../src/components/form/button/src/button'
 
 Vue.config.productionTip = false
 Vue.config.devtools = false
@@ -61,7 +61,6 @@ describe('Button', () => {
         iconPosition: 'right'
       }
     }).$mount(div)
-    console.log(vm.$chidren);
     const icon = vm.$el.querySelector('svg')
     expect(getComputedStyle(icon).order).to.eq('2')
     vm.$el.remove()
@@ -138,7 +137,6 @@ describe('Button', () => {
         size: "mini"
       }
     }).$mount(div);
-    console.log(vm.$el);
     expect(getComputedStyle(vm.$el).padding).to.eq('6px 12px')
     vm.$el.remove()
     vm.$destroy()

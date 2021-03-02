@@ -1,7 +1,7 @@
 const expect = chai.expect;
 import Vue from 'vue'
-import Row from '../src/components/grid/row.vue'
-import Col from '../src/components/grid/col.vue'
+import Row from '../src/components/grid/row/src/row.vue'
+import Col from '../src/components/grid/col/src/col.vue'
 Vue.component("ik-row", Row)
 Vue.component("ik-col", Col)
 Vue.config.productionTip = false
@@ -29,8 +29,8 @@ describe('Row', () => {
         el: testDiv
       })
       setTimeout(() => {
-        const row = vm.$el.querySelector('.row')
-        const cols = vm.$el.querySelectorAll('.col')
+        const row = vm.$el.querySelector('.ik-row')
+        const cols = vm.$el.querySelectorAll('.ik-col')
         expect(getComputedStyle(row).marginLeft).to.equal('-5px')
         expect(getComputedStyle(row).marginRight).to.equal('-5px')
         expect(getComputedStyle(cols[0]).paddingRight).to.equal('5px')
@@ -50,7 +50,22 @@ describe('Row', () => {
     vm = new Vue({
         el: testDiv
       })
-      const row = vm.$el.querySelector('.row')
+      const row = vm.$el.querySelector('.ik-row')
+      expect(getComputedStyle(row).alignItems).to.equal('center')
+      vm.$el.remove()
+      vm.$destroy()
+  })
+  it('可以设置 justify.', () => {
+    document.body.appendChild(testDiv)
+    testDiv.innerHTML = ` 
+            <ik-row justify="center" >
+              <ik-col span="20"></ik-col>
+              <ik-col span="4"></ik-col>
+            </ik-row>`
+    vm = new Vue({
+        el: testDiv
+      })
+      const row = vm.$el.querySelector('.ik-row')
       expect(getComputedStyle(row).justifyContent).to.equal('center')
       vm.$el.remove()
       vm.$destroy()

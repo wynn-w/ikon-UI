@@ -1,9 +1,9 @@
 const expect = chai.expect;
 import Vue from 'vue'
-import Col from '../src/components/grid/col.vue'
+import Col from '../src/components/grid/col/src/col.vue'
 Vue.config.productionTip = false
 Vue.config.devtools = false
-describe('Row', () => {
+describe('Col', () => {
   it('存在.', () => {
     expect(Col).to.exist
   })
@@ -22,7 +22,7 @@ describe('Row', () => {
         }
       }).$mount(testDiv)
       const rowEle = vm.$el
-      expect(rowEle.classList.contains('col-1')).to.be.true
+      expect(rowEle.classList.contains('ik-col--1')).to.be.true
     })
     it('可以设置 offset.', () => {
       vm = new Constructor({
@@ -31,7 +31,7 @@ describe('Row', () => {
         }
       }).$mount(testDiv)
       const rowEle = vm.$el
-      expect(rowEle.classList.contains('offset-1')).to.be.true
+      expect(rowEle.classList.contains('ik-col--offset-1')).to.be.true
     })
     it('可以设置 ipad.', () => {
       vm = new Constructor({
@@ -40,8 +40,8 @@ describe('Row', () => {
         }
       }).$mount(testDiv)
       const rowEle = vm.$el
-      expect(rowEle.classList.contains('col-ipad-24')).to.be.true
-      expect(rowEle.classList.contains('offset-ipad-1')).to.be.true
+      expect(rowEle.classList.contains('ik-col--ipad-24')).to.be.true
+      expect(rowEle.classList.contains('ik-col--offset-ipad-1')).to.be.true
     })
     it('可以设置 ipad.', () => {
       vm = new Constructor({
@@ -50,8 +50,8 @@ describe('Row', () => {
         }
       }).$mount(testDiv)
       const rowEle = vm.$el
-      expect(rowEle.classList.contains('col-ipad-24')).to.be.true
-      expect(rowEle.classList.contains('offset-ipad-1')).to.be.true
+      expect(rowEle.classList.contains('ik-col--ipad-24')).to.be.true
+      expect(rowEle.classList.contains('ik-col--offset-ipad-1')).to.be.true
     })
     it('可以设置 pc.', () => {
       vm = new Constructor({
@@ -60,8 +60,8 @@ describe('Row', () => {
         }
       }).$mount(testDiv)
       const rowEle = vm.$el
-      expect(rowEle.classList.contains('col-pc-24')).to.be.true
-      expect(rowEle.classList.contains('offset-pc-1')).to.be.true
+      expect(rowEle.classList.contains('ik-col--pc-24')).to.be.true
+      expect(rowEle.classList.contains('ik-col--offset-pc-1')).to.be.true
     })
     it('可以设置 narrowPc.', () => {
       vm = new Constructor({
@@ -70,8 +70,8 @@ describe('Row', () => {
         }
       }).$mount(testDiv)
       const rowEle = vm.$el
-      expect(rowEle.classList.contains('col-narrow-pc-24')).to.be.true
-      expect(rowEle.classList.contains('offset-narrow-pc-1')).to.be.true
+      expect(rowEle.classList.contains('ik-col--narrow-pc-24')).to.be.true
+      expect(rowEle.classList.contains('ik-col--offset-narrow-pc-1')).to.be.true
     })
     it('可以设置 widePc.', () => {
       vm = new Constructor({
@@ -80,8 +80,8 @@ describe('Row', () => {
         }
       }).$mount(testDiv)
       const rowEle = vm.$el
-      expect(rowEle.classList.contains('col-wide-pc-24')).to.be.true
-      expect(rowEle.classList.contains('offset-wide-pc-1')).to.be.true
+      expect(rowEle.classList.contains('ik-col--wide-pc-24')).to.be.true
+      expect(rowEle.classList.contains('ik-col--offset-wide-pc-1')).to.be.true
     })
   })
 })
