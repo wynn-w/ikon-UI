@@ -20,11 +20,9 @@ Vue.use(ikonUI);
 按需引入
 ```
 import {Button} from 'ikon-ui';
-Vue.component(Button.name, Button);
-Vue.component(Select.name, Select);
+Vue.component(Button.name, Button)
 /* 或写为
  * Vue.use(Button)
- * Vue.use(Select)
  */
 ```
 

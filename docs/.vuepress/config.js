@@ -1,7 +1,7 @@
 module.exports = {
     base: '/ikon-UI/',
     title: 'ikon UI',
-    description: '一个基于 Vue 2.0的 UI 框架,持续学习更新中...',
+    description: '用 Vue 造轮子',
     plugins: ['demo-container',
 
     ],
@@ -19,9 +19,9 @@ module.exports = {
             }
         ],
         nav: [
-            { text: '主页', link: '/' },
-            { text: 'Github', link: 'https://github.com/wynn-w/' },
-            { text: '欢迎 star', link: 'https://github.com/wynn-w/ikon-UI' },
+            { text: '主页', link: '/', target: "_self" },
+            { text: "文档", link: "/introduce/", target: "_self" },
+            { text: '项目地址', link: 'https://github.com/wynn-w/ikon-UI' },
         ],
         sidebar: [
             {
