@@ -3,7 +3,7 @@
     <input
       :id="id"
       :name="name"
-      :value="getValue"
+      :value="value"
       :disabled="disabled"
       :readonly="readonly"
       :type="currentType"
@@ -22,7 +22,7 @@
     />
     <div class="ik-input__icon-wrapper" ref="ikIputIcon">
       <div
-        v-if="clearable && currentValue != ''"
+        v-if="clearable && value != ''"
         class="ik-input__icon-wrapper__clear"
         @click="clearValue"
       >
@@ -133,9 +133,6 @@ export default {
     },
   },
   computed: {
-    getValue() {
-      return this.changeValue();
-    },
     // getType() {
     //   return this.changeType();
     // },
@@ -150,7 +147,6 @@ export default {
     return {
       icon: `ik-icon-eye-close`,
       currentType: null,
-      currentValue: null,
       currentMaxLength: null,
     };
   },
@@ -176,27 +172,23 @@ export default {
       }
     },
     localtedPorps() {
-      this.value && this.changeValue(this.value);
       this.type && (this.currentType = this.type);
       this.showPassword && (this.currentType = "password");
       this.maxlength && (this.currentMaxLength = this.maxlength);
     },
     clearValue() {
-      this.changeValue("");
+      this.value = ''
       // 通知外部
-      this.$emit("change", this.currentValue);
-      this.$emit("input", this.currentValue);
-      this.$emit("focus", this.currentValue);
-      this.$emit("blur", this.currentValue);
+      this.$emit("change", this.value);
+      this.$emit("input", this.value);
+      this.$emit("focus", this.value);
+      this.$emit("blur", this.value);
     },
     // changeMaxLength(value) {
     //   this.currentMaxLength = value === 0 ? value : this.maxlength;
     //   return this.currentMaxLength;
     // },
-    changeValue(value) {
-      this.currentValue = value === "" ? value : this.value;
-      return this.currentValue;
-    },
+
     // changeType(type) {
     //   this.currentType = type ? type : this.type;
     //   return this.currentType;
@@ -253,7 +245,7 @@ $red: #f1453e;
     }
   }
   > input {
-    width:100%;
+    width: 100%;
     padding: 0 12px;
     border: 1px solid $border-color;
     border-radius: 4.6662px;
