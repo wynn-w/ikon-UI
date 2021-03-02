@@ -1,10 +1,8 @@
-@import './_variable.css';
-
 * {
     margin     : 0;
     padding    : 0;
     box-sizing : border-box;
-    font-size  : var(--font-size);
+    font-size  : 14px;
     font-family: Arial, Helvetica, sans-serif;
 }
 
