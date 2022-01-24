@@ -62,7 +62,7 @@ export default {
       this.addContentListeners();
     }
   },
-  destroyed() {
+  beforeDestroy() {
       this.removeAllListeners();
   },
   methods: {
@@ -168,8 +168,6 @@ export default {
       } else if (this.trigger === "hover") {
         this.$refs.popover.removeEventListener("mouseenter", this.open);
         this.$refs.popover.removeEventListener("mouseleave", this.close);
-        this.$refs.contentWrapper.removeEventListener("mouseenter", this.open);
-        this.$refs.contentWrapper.removeEventListener("mouseleave", this.close);
       } else {
         this.$refs.popover.removeEventListener("mousedown", this.open);
         this.$refs.popover.removeEventListener("mouseup", this.close);
